@@ -1,0 +1,23 @@
+# Visual Studio
+.vs/
+.vscode/
+
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Logs
+*.log
+
+* Local database files
+*.mdf**.ldf
+
+# Rider
+.idea/
+
+# Publish*folders
+publish/
