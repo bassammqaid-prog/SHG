@@ -64,6 +64,10 @@ public class ProductsController : Controller
             Description = product.Description,
             Price = product.Price,
             ImageUrl = product.ImageUrl,
+            GalleryImages = product.ProductImages
+                .Select(pi => pi.ImageUrl)
+                .Where(url => !string.IsNullOrWhiteSpace(url))
+                .ToList(),
             ModelNumber = product.ModelNumber,
             Brand = product.Brand,
             StockQuantity = product.StockQuantity,

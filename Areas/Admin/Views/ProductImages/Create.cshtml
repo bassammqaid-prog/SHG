@@ -1,0 +1,44 @@
+@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProductImageCreateViewModel
+
+@{
+    ViewData["Title"] = "Upload Product Image";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1">Upload Product Image</h1>
+            <p class="text-muted mb-0">Add a product image or URL for @Model.ProductName.</p>
+        </div>
+        <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">Back to Gallery</a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form asp-area="Admin" asp-controller="ProductImages" asp-action="Create" asp-route-productId="@Model.ProductId" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label"></label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ImageUrl" class="form-label"></label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Save Image</button>
+                    <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

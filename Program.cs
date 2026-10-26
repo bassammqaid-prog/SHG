@@ -30,6 +30,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // receives its own instance, which helps keep state isolated and predictable.
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
 builder.Services.AddScoped<IQuoteRequestRepository, QuoteRequestRepository>();
@@ -38,6 +39,7 @@ builder.Services.AddScoped<IQuoteRequestRepository, QuoteRequestRepository>();
 // services so controllers can request them through dependency injection.
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductImageService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ContactMessageService>();
 builder.Services.AddScoped<QuoteRequestService>();

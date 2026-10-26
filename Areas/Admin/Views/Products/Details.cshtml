@@ -12,11 +12,12 @@
         </div>
         <div>
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">Edit</a>
+            <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.Id" class="btn btn-outline-primary me-2">Manage Images</a>
             <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
         </div>
     </div>
 
-    <div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0 mb-4">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
@@ -64,4 +65,23 @@
             </div>
         </div>
     </div>
+
+    @if (Model.GalleryImages.Any())
+    {
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0">Gallery</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    @foreach (var image in Model.GalleryImages)
+                    {
+                        <div class="col-md-3">
+                            <img src="@image" class="img-fluid rounded border" alt="Product gallery image" style="height: 180px; width: 100%; object-fit: cover;" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
 </div>

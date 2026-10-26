@@ -55,6 +55,12 @@ public class ProductDetailsViewModel
     [Display(Name = "Image URL")]
     public string? ImageUrl { get; set; }
 
+    /// <summary>
+    /// Product gallery images already associated with this product.
+    /// They are displayed in the admin detail view so staff can manage the visual catalog.
+    /// </summary>
+    public List<string> GalleryImages { get; set; } = new();
+
     [Display(Name = "Model Number")]
     public string? ModelNumber { get; set; }
 
