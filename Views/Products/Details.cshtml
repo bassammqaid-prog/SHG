@@ -1,0 +1,60 @@
+@model Al_Shami_ِAISS_.ViewModels.ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" class="img-fluid rounded shadow-sm" alt="@Model.Name" />
+                }
+                else
+                {
+                    <div class="bg-light rounded shadow-sm d-flex align-items-center justify-content-center" style="height: 420px;">
+                        <span class="text-muted">No product image available</span>
+                    </div>
+                }
+
+                @if (Model.GalleryImages.Any())
+                {
+                    <div class="row g-3 mt-3">
+                        @foreach (var image in Model.GalleryImages)
+                        {
+                            <div class="col-4">
+                                <img src="@image" class="img-fluid rounded border" alt="@Model.Name" style="height: 120px; object-fit: cover; width: 100%;" />
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="col-lg-6">
+                <span class="badge bg-primary-subtle text-primary mb-3">@Model.CategoryName</span>
+                <h1 class="fw-bold mb-3">@Model.Name</h1>
+                <p class="lead text-primary fw-semibold">@Model.Price.ToString("C")</p>
+
+                <dl class="row">
+                    <dt class="col-sm-4">Brand</dt>
+                    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Brand) ? "-" : Model.Brand)</dd>
+
+                    <dt class="col-sm-4">Model</dt>
+                    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.ModelNumber) ? "-" : Model.ModelNumber)</dd>
+
+                    <dt class="col-sm-4">Stock</dt>
+                    <dd class="col-sm-8">@Model.StockQuantity</dd>
+                </dl>
+
+                <p class="text-muted">@Model.Description</p>
+
+                <div class="d-flex gap-3 flex-wrap mt-4">
+                    <a asp-controller="Quote" asp-action="Index" class="btn btn-primary">Request Quote</a>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-secondary">Back to Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

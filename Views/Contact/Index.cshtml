@@ -1,0 +1,68 @@
+@model Al_Shami_ِAISS_.ViewModels.ContactFormViewModel
+
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <div class="col-lg-5">
+                <span class="badge bg-primary-subtle text-primary mb-3">Contact AISS</span>
+                <h1 class="fw-bold mb-3">Let’s discuss your requirement</h1>
+                <p class="text-muted">We are ready to help with industrial supply, project support, and tailored solutions.</p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-telephone me-2"></i> +966 000 000 000</li>
+                    <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@aiss.com</li>
+                    <li><i class="bi bi-geo-alt me-2"></i> Riyadh, Saudi Arabia</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <form asp-action="Submit" method="post">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="FullName" class="form-label"></label>
+                                    <input asp-for="FullName" class="form-control" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Phone" class="form-label"></label>
+                                    <input asp-for="Phone" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Subject" class="form-label"></label>
+                                    <input asp-for="Subject" class="form-control" />
+                                    <span asp-validation-for="Subject" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="Message" class="form-label"></label>
+                                    <textarea asp-for="Message" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="Message" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

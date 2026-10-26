@@ -2,7 +2,176 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model Al_Shami_ِAISS_.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@* This page is the public landing page for AISS and is designed to build trust with customers. *@
+@* The model is mapped in the controller so the Razor view stays focused on presentation and not data access. *@
+
+<section class="bg-dark text-white py-5">
+    <div class="container py-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <span class="badge bg-warning text-dark mb-3">Trusted Industrial Solutions</span>
+                <h1 class="display-4 fw-bold">Powering Progress with Reliable Industrial Solutions</h1>
+                <p class="lead text-light-emphasis">@Model.CompanyIntroduction</p>
+                <div class="d-flex gap-3 flex-wrap mt-4">
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-warning btn-lg">Explore Products</a>
+                    <a asp-controller="Quote" asp-action="Index" class="btn btn-outline-light btn-lg">Request a Quote</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <h3 class="h5 text-uppercase text-primary">Mission</h3>
+                        <p class="mb-0">@Model.MissionStatement</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Our Core Categories</h2>
+            <p class="text-muted">Solutions designed for safety, efficiency, and long-term performance.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var category in Model.FeaturedCategories)
+            {
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3 text-primary">
+                                <i class="bi bi-tags-fill fs-3"></i>
+                            </div>
+                            <h3 class="h5">@category.Name</h3>
+                            <p class="text-muted mb-0">@category.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h2 class="fw-bold">Featured Products</h2>
+                <p class="text-muted mb-0">Selected solutions trusted by industrial and commercial clients.</p>
+            </div>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">View All</a>
+        </div>
+        <div class="row g-4">
+            @foreach (var product in Model.FeaturedProducts)
+            {
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                        @if (!string.IsNullOrWhiteSpace(product.ImageUrl))
+                        {
+                            <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 220px; object-fit: cover;" />
+                        }
+                        <div class="card-body">
+                            <span class="badge bg-light text-dark mb-2">@product.CategoryName</span>
+                            <h3 class="h5">@product.Name</h3>
+                            <p class="text-muted mb-2">@product.Brand</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <strong class="text-primary">@product.Price.ToString("C")</strong>
+                                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Featured Projects</h2>
+            <p class="text-muted">Our completed work reflects reliability, quality, and client-first execution.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var project in Model.FeaturedProjects)
+            {
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        @if (!string.IsNullOrWhiteSpace(project.ImageUrl))
+                        {
+                            <img src="@project.ImageUrl" class="card-img-top" alt="@project.Title" style="height: 220px; object-fit: cover;" />
+                        }
+                        <div class="card-body">
+                            <h3 class="h5">@project.Title</h3>
+                            <p class="text-muted mb-2">@project.ClientName</p>
+                            <p class="mb-3">@project.Location</p>
+                            <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id" class="btn btn-outline-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What We Do</h2>
+            <p class="text-muted">AISS delivers integrated solutions across critical infrastructure and industrial operations.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var service in Model.Services)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-check-circle-fill text-success mb-3 fs-4"></i>
+                            <h3 class="h5">@service</h3>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Why Choose AISS</h2>
+        </div>
+        <div class="row g-4">
+            @foreach (var reason in Model.WhyChooseUs)
+            {
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <i class="bi bi-shield-check text-primary fs-2 mb-3"></i>
+                            <p class="mb-0 fw-semibold">@reason</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Looking for a trusted supply and project partner?</h2>
+        <p class="lead text-light-emphasis">Let us support your next industrial, energy, or infrastructure requirement.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+            <a asp-controller="Contact" asp-action="Index" class="btn btn-light btn-lg">Contact Us</a>
+            <a asp-controller="Quote" asp-action="Index" class="btn btn-outline-light btn-lg">Request Quote</a>
+        </div>
+    </div>
+</section>

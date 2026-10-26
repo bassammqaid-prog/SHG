@@ -3,45 +3,78 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Al_Shami_ِAISS_</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - AISS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Al_Shami_ِAISS_.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="bg-light">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Al_Shami_ِAISS_</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">AISS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")" asp-controller="Home" asp-action="About">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")" asp-controller="Products" asp-action="Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Projects" ? "active" : "")" asp-controller="Projects" asp-action="Index">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")" asp-controller="Contact" asp-action="Index">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Quote" ? "active" : "")" asp-controller="Quote" asp-action="Index">Request Quote</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-light mt-5 pt-5 pb-4">
         <div class="container">
-            &copy; 1448 - Al_Shami_ِAISS_ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">AISS</h5>
+                    <p class="text-secondary">Trusted industrial and energy solutions provider for commercial, industrial, and infrastructure sectors.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Home" asp-action="About">About Us</a></li>
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Products" asp-action="Index">Products</a></li>
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Projects" asp-action="Index">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Contact</h5>
+                    <p class="text-secondary mb-1">Email: info@aiss.com</p>
+                    <p class="text-secondary mb-1">Phone: +966 12 345 6789</p>
+                    <p class="text-secondary mb-0">Location: Riyadh, Saudi Arabia</p>
+                </div>
+            </div>
+            <div class="border-top border-secondary mt-4 pt-3 text-secondary small">
+                &copy; 2026 AISS. All rights reserved.
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

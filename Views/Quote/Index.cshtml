@@ -1,0 +1,63 @@
+@model Al_Shami_ِAISS_.ViewModels.QuoteRequestViewModel
+
+@{
+    ViewData["Title"] = "Request Quote";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-4">
+                    <span class="badge bg-primary-subtle text-primary mb-3">Request a Quote</span>
+                    <h1 class="fw-bold">Tell us about your project</h1>
+                    <p class="text-muted">Share your requirements and our team will contact you with a suitable solution.</p>
+                </div>
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <form asp-action="Submit" method="post">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="FullName" class="form-label"></label>
+                                    <input asp-for="FullName" class="form-control" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="CompanyName" class="form-label"></label>
+                                    <input asp-for="CompanyName" class="form-control" />
+                                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Phone" class="form-label"></label>
+                                    <input asp-for="Phone" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="Message" class="form-label"></label>
+                                    <textarea asp-for="Message" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="Message" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
