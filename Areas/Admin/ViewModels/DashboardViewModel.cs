@@ -30,4 +30,29 @@ public class DashboardViewModel
     /// Total number of quote request submissions.
     /// </summary>
     public int TotalQuoteRequests { get; set; }
+
+    /// <summary>
+    /// Total number of registered users in the application.
+    /// </summary>
+    public int TotalUsers { get; set; }
+
+    /// <summary>
+    /// Total number of activity log entries recorded in the system.
+    /// </summary>
+    public int TotalActivityLogs { get; set; }
+
+    /// <summary>
+    /// Recent business actions recorded for the admin notification center.
+    /// </summary>
+    public List<RecentNotificationViewModel> RecentActivityLogs { get; set; } = new();
+
+    /// <summary>
+    /// Recent contact submissions awaiting review.
+    /// </summary>
+    public List<RecentNotificationViewModel> RecentContactMessages { get; set; } = new();
+
+    /// <summary>
+    /// Recent quote requests awaiting review.
+    /// </summary>
+    public List<RecentNotificationViewModel> RecentQuoteRequests { get; set; } = new();
 }

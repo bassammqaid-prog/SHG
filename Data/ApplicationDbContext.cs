@@ -47,6 +47,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ProjectImage> ProjectImages { get; set; }
 
     /// <summary>
+    /// Activity log table used for business auditing and operational monitoring.
+    /// </summary>
+    public DbSet<ActivityLog> ActivityLogs { get; set; }
+
+    /// <summary>
     /// Quote requests table for leads.
     /// </summary>
     public DbSet<QuoteRequest> QuoteRequests { get; set; }
@@ -117,6 +122,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<ProductImage>().ToTable("ProductImages");
         modelBuilder.Entity<Project>().ToTable("Projects");
         modelBuilder.Entity<ProjectImage>().ToTable("ProjectImages");
+        modelBuilder.Entity<ActivityLog>().ToTable("ActivityLogs");
         modelBuilder.Entity<QuoteRequest>().ToTable("QuoteRequests");
         modelBuilder.Entity<ContactMessage>().ToTable("ContactMessages");
 
@@ -157,6 +163,20 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<ProjectImage>()
             .Property(pi => pi.ImageUrl)
             .IsRequired();
+
+        modelBuilder.Entity<ActivityLog>()
+            .Property(log => log.Action)
+            .IsRequired()
+            .HasMaxLength(200);
+
+        modelBuilder.Entity<ActivityLog>()
+            .Property(log => log.EntityName)
+            .IsRequired()
+            .HasMaxLength(200);
+
+        modelBuilder.Entity<ActivityLog>()
+            .Property(log => log.Description)
+            .HasMaxLength(1000);
 
         modelBuilder.Entity<QuoteRequest>()
             .Property(q => q.FullName)

@@ -12,13 +12,17 @@ namespace Al_Shami_ِAISS_.Controllers;
 public class ContactController : Controller
 {
     private readonly ContactMessageService _contactMessageService;
+    private readonly IEmailService _emailService;
+    private readonly IActivityLogService _activityLogService;
 
     /// <summary>
     /// Initializes the controller using dependency injection.
     /// </summary>
-    public ContactController(ContactMessageService contactMessageService)
+    public ContactController(ContactMessageService contactMessageService, IEmailService emailService, IActivityLogService activityLogService)
     {
         _contactMessageService = contactMessageService;
+        _emailService = emailService;
+        _activityLogService = activityLogService;
     }
 
     /// <summary>
@@ -53,6 +57,15 @@ public class ContactController : Controller
         };
 
         await _contactMessageService.AddAsync(contactMessage);
+
+        await _emailService.SendContactNotificationAsync(contactMessage);
+        await _emailService.SendContactConfirmationAsync(contactMessage);
+        await _activityLogService.LogAsync(
+            "Contact Form Submitted",
+            nameof(ContactMessage),
+            contactMessage.Id,
+            $"Contact message from {contactMessage.FullName} was submitted.");
+
         TempData["SuccessMessage"] = "Thank you. Your message has been sent successfully.";
 
         return RedirectToAction(nameof(Index));

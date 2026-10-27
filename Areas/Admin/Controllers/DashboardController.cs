@@ -1,7 +1,10 @@
 using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
+using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
 
@@ -19,6 +22,8 @@ public class DashboardController : Controller
     private readonly ProjectService _projectService;
     private readonly ContactMessageService _contactMessageService;
     private readonly QuoteRequestService _quoteRequestService;
+    private readonly IActivityLogService _activityLogService;
+    private readonly UserManager<ApplicationUser> _userManager;
 
     /// <summary>
     /// Initializes the dashboard controller with the required service dependencies.
@@ -29,13 +34,17 @@ public class DashboardController : Controller
         ProductService productService,
         ProjectService projectService,
         ContactMessageService contactMessageService,
-        QuoteRequestService quoteRequestService)
+        QuoteRequestService quoteRequestService,
+        IActivityLogService activityLogService,
+        UserManager<ApplicationUser> userManager)
     {
         _categoryService = categoryService;
         _productService = productService;
         _projectService = projectService;
         _contactMessageService = contactMessageService;
         _quoteRequestService = quoteRequestService;
+        _activityLogService = activityLogService;
+        _userManager = userManager;
     }
 
     /// <summary>
@@ -49,6 +58,7 @@ public class DashboardController : Controller
         var projects = await _projectService.GetAllAsync();
         var contactMessages = await _contactMessageService.GetAllAsync();
         var quoteRequests = await _quoteRequestService.GetAllAsync();
+        var activityLogs = await _activityLogService.GetRecentAsync(5);
 
         var viewModel = new DashboardViewModel
         {
@@ -56,7 +66,40 @@ public class DashboardController : Controller
             TotalProducts = products.Count(),
             TotalProjects = projects.Count(),
             TotalContactMessages = contactMessages.Count(),
-            TotalQuoteRequests = quoteRequests.Count()
+            TotalQuoteRequests = quoteRequests.Count(),
+            TotalUsers = await _userManager.Users.CountAsync(),
+            TotalActivityLogs = (await _activityLogService.GetAllAsync()).Count(),
+            RecentActivityLogs = activityLogs
+                .Select(log => new RecentNotificationViewModel
+                {
+                    Id = log.Id,
+                    Title = log.Action,
+                    Detail = log.Description,
+                    CreatedAt = log.CreatedAt
+                })
+                .ToList(),
+            RecentContactMessages = contactMessages
+                .OrderByDescending(message => message.CreatedAt)
+                .Take(5)
+                .Select(message => new RecentNotificationViewModel
+                {
+                    Id = message.Id,
+                    Title = message.FullName,
+                    Detail = message.Subject,
+                    CreatedAt = message.CreatedAt
+                })
+                .ToList(),
+            RecentQuoteRequests = quoteRequests
+                .OrderByDescending(request => request.CreatedAt)
+                .Take(5)
+                .Select(request => new RecentNotificationViewModel
+                {
+                    Id = request.Id,
+                    Title = request.FullName,
+                    Detail = request.CompanyName ?? "No company provided",
+                    CreatedAt = request.CreatedAt
+                })
+                .ToList()
         };
 
         return View(viewModel);

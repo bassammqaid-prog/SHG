@@ -56,10 +56,13 @@
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="Admin" asp-controller="ContactMessages" asp-action="Index">Messages</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="QuoteRequests" asp-action="Index">Quotes</a>
-                                </li>
-                            }
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Admin" asp-controller="QuoteRequests" asp-action="Index">Quotes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Admin" asp-controller="ActivityLogs" asp-action="Index">Activity Logs</a>
+                                    </li>
+                                }
                             else if (User.IsInRole("Manager"))
                             {
                                 <li class="nav-item">

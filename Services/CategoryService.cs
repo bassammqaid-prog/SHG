@@ -11,15 +11,18 @@ namespace Al_Shami_ِAISS_.Services;
 public class CategoryService
 {
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IActivityLogService _activityLogService;
 
     /// <summary>
     /// Initializes the category service with its repository dependency.
     /// Dependency injection supplies the repository and avoids hard-coded database access.
     /// </summary>
     /// <param name="categoryRepository">The category repository.</param>
-    public CategoryService(ICategoryRepository categoryRepository)
+    /// <param name="activityLogService">The service responsible for recording category-related audit entries.</param>
+    public CategoryService(ICategoryRepository categoryRepository, IActivityLogService activityLogService)
     {
         _categoryRepository = categoryRepository;
+        _activityLogService = activityLogService;
     }
 
     /// <summary>
@@ -62,6 +65,8 @@ public class CategoryService
         await _categoryRepository.AddAsync(category);
         await _categoryRepository.SaveChangesAsync();
 
+        await _activityLogService.LogCategoryCreatedAsync(category);
+
         return category;
     }
 
@@ -83,6 +88,8 @@ public class CategoryService
 
         _categoryRepository.Update(category);
         await _categoryRepository.SaveChangesAsync();
+
+        await _activityLogService.LogCategoryUpdatedAsync(category);
     }
 
     /// <summary>
@@ -100,5 +107,7 @@ public class CategoryService
 
         _categoryRepository.Delete(category);
         await _categoryRepository.SaveChangesAsync();
+
+        await _activityLogService.LogCategoryDeletedAsync(category);
     }
 }

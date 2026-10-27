@@ -1,0 +1,51 @@
+@model List<Al_Shami_ِAISS_.Areas.Admin.ViewModels.ActivityLogListItemViewModel>
+
+@{
+    ViewData["Title"] = "Activity Logs";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1">Activity Logs</h1>
+            <p class="text-muted mb-0">System audit trail and administrative activity history.</p>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive card border-0 shadow-sm">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>User</th>
+                        <th>Action</th>
+                        <th>Entity</th>
+                        <th>Date</th>
+                        <th>IP Address</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var log in Model)
+                    {
+                        <tr>
+                            <td>@log.UserDisplayName</td>
+                            <td>@log.Action</td>
+                            <td>@log.EntityName</td>
+                            <td>@log.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@(string.IsNullOrWhiteSpace(log.IpAddress) ? "-" : log.IpAddress)</td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="ActivityLogs" asp-action="Details" asp-route-id="@log.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">No activity has been recorded yet.</div>
+    }
+</div>

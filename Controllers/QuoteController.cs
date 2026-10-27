@@ -12,13 +12,17 @@ namespace Al_Shami_ِAISS_.Controllers;
 public class QuoteController : Controller
 {
     private readonly QuoteRequestService _quoteRequestService;
+    private readonly IEmailService _emailService;
+    private readonly IActivityLogService _activityLogService;
 
     /// <summary>
     /// Initializes the controller through dependency injection.
     /// </summary>
-    public QuoteController(QuoteRequestService quoteRequestService)
+    public QuoteController(QuoteRequestService quoteRequestService, IEmailService emailService, IActivityLogService activityLogService)
     {
         _quoteRequestService = quoteRequestService;
+        _emailService = emailService;
+        _activityLogService = activityLogService;
     }
 
     /// <summary>
@@ -53,6 +57,15 @@ public class QuoteController : Controller
         };
 
         await _quoteRequestService.AddAsync(quoteRequest);
+
+        await _emailService.SendQuoteRequestNotificationAsync(quoteRequest);
+        await _emailService.SendQuoteRequestConfirmationAsync(quoteRequest);
+        await _activityLogService.LogAsync(
+            "Quote Request Submitted",
+            nameof(QuoteRequest),
+            quoteRequest.Id,
+            $"Quote request from {quoteRequest.FullName} was submitted.");
+
         TempData["SuccessMessage"] = "Your quote request has been submitted successfully.";
 
         return RedirectToAction(nameof(Index));

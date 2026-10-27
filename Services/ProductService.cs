@@ -10,14 +10,17 @@ namespace Al_Shami_ِAISS_.Services;
 public class ProductService
 {
     private readonly IProductRepository _productRepository;
+    private readonly IActivityLogService _activityLogService;
 
     /// <summary>
     /// Initializes the product service with a repository dependency.
     /// </summary>
     /// <param name="productRepository">The product repository.</param>
-    public ProductService(IProductRepository productRepository)
+    /// <param name="activityLogService">The logging service used to track catalog changes.</param>
+    public ProductService(IProductRepository productRepository, IActivityLogService activityLogService)
     {
         _productRepository = productRepository;
+        _activityLogService = activityLogService;
     }
 
     /// <summary>
@@ -70,6 +73,8 @@ public class ProductService
         await _productRepository.AddAsync(product);
         await _productRepository.SaveChangesAsync();
 
+        await _activityLogService.LogProductCreatedAsync(product);
+
         return product;
     }
 
@@ -96,6 +101,8 @@ public class ProductService
 
         _productRepository.Update(product);
         await _productRepository.SaveChangesAsync();
+
+        await _activityLogService.LogProductUpdatedAsync(product);
     }
 
     /// <summary>
@@ -113,5 +120,7 @@ public class ProductService
 
         _productRepository.Delete(product);
         await _productRepository.SaveChangesAsync();
+
+        await _activityLogService.LogProductDeletedAsync(product);
     }
 }

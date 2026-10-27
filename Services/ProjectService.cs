@@ -10,14 +10,16 @@ namespace Al_Shami_ِAISS_.Services;
 public class ProjectService
 {
     private readonly IProjectRepository _projectRepository;
+    private readonly IActivityLogService _activityLogService;
 
     /// <summary>
     /// Initializes the project service with a repository dependency.
     /// Dependency injection supplies the repository automatically.
     /// </summary>
-    public ProjectService(IProjectRepository projectRepository)
+    public ProjectService(IProjectRepository projectRepository, IActivityLogService activityLogService)
     {
         _projectRepository = projectRepository;
+        _activityLogService = activityLogService;
     }
 
     /// <summary>
@@ -54,6 +56,8 @@ public class ProjectService
         await _projectRepository.AddAsync(project);
         await _projectRepository.SaveChangesAsync();
 
+        await _activityLogService.LogProjectCreatedAsync(project);
+
         return project;
     }
 
@@ -74,6 +78,8 @@ public class ProjectService
 
         _projectRepository.Update(project);
         await _projectRepository.SaveChangesAsync();
+
+        await _activityLogService.LogProjectUpdatedAsync(project);
     }
 
     /// <summary>
@@ -90,5 +96,7 @@ public class ProjectService
 
         _projectRepository.Delete(project);
         await _projectRepository.SaveChangesAsync();
+
+        await _activityLogService.LogProjectDeletedAsync(project);
     }
 }

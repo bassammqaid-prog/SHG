@@ -23,6 +23,7 @@ if (string.IsNullOrWhiteSpace(connectionString))
 
 // Add MVC support to the application so controllers and views can be used.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 // The DbContext is registered with SQL Server so every repository can use the same database connection.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -64,6 +65,7 @@ builder.Services.AddScoped<IProjectImageRepository, ProjectImageRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
 builder.Services.AddScoped<IQuoteRequestRepository, QuoteRequestRepository>();
+builder.Services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
 
 // Services sit above repositories and contain business logic. They are also registered as scoped
 // services so controllers can request them through dependency injection.
@@ -74,7 +76,11 @@ builder.Services.AddScoped<ProjectImageService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ContactMessageService>();
 builder.Services.AddScoped<QuoteRequestService>();
+builder.Services.AddScoped<IActivityLogService, ActivityLogService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IdentitySeedService>();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 using Al_Shami_ِAISS_.Models;
+using Al_Shami_ِAISS_.Services;
 using Al_Shami_ِAISS_.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,14 +15,16 @@ public class AccountController : Controller
 {
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IActivityLogService _activityLogService;
 
     /// <summary>
     /// Initializes the controller with ASP.NET Core Identity services.
     /// </summary>
-    public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+    public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IActivityLogService activityLogService)
     {
         _signInManager = signInManager;
         _userManager = userManager;
+        _activityLogService = activityLogService;
     }
 
     /// <summary>
@@ -65,6 +68,8 @@ public class AccountController : Controller
 
         if (result.Succeeded)
         {
+            await _activityLogService.LogLoginAsync(user.Id, user.Email ?? user.UserName);
+
             if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
@@ -95,6 +100,12 @@ public class AccountController : Controller
     [Authorize]
     public async Task<IActionResult> Logout()
     {
+        var user = await _userManager.GetUserAsync(User);
+        if (user is not null)
+        {
+            await _activityLogService.LogLogoutAsync(user.Id, user.Email ?? user.UserName);
+        }
+
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home", new { area = "" });
     }
