@@ -11,6 +11,15 @@ namespace Al_Shami_ِAISS_.Services;
 /// </summary>
 public class ProductImageService
 {
+    private const long MaxImageSizeInBytes = 5 * 1024 * 1024;
+    private static readonly HashSet<string> AllowedExtensions = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".webp"
+    };
+
     private readonly IProductImageRepository _productImageRepository;
 
     /// <summary>
@@ -64,7 +73,23 @@ public class ProductImageService
 
         if (imageFile is null && string.IsNullOrWhiteSpace(imageUrl))
         {
-            throw new InvalidOperationException("Please provide either an uploaded file or an image URL.");
+            throw new InvalidOperationException("Please upload an image file or provide an image URL.");
+        }
+
+        if (imageFile is not null)
+        {
+            ValidateImageFile(imageFile);
+        }
+
+        if (!string.IsNullOrWhiteSpace(imageUrl))
+        {
+            var trimmedUrl = imageUrl.Trim();
+            if (!trimmedUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase)
+                && !trimmedUrl.StartsWith("/", StringComparison.Ordinal)
+                && !trimmedUrl.StartsWith("~", StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException("Please provide a valid image URL.");
+            }
         }
 
         var storedImageUrl = await ResolveImageUrlAsync(imageFile, imageUrl, hostingEnvironment);
@@ -94,7 +119,8 @@ public class ProductImageService
             throw new KeyNotFoundException($"Product image with id {id} was not found.");
         }
 
-        if (!string.IsNullOrWhiteSpace(productImage.ImageUrl) && !productImage.ImageUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+        if (!string.IsNullOrWhiteSpace(productImage.ImageUrl)
+            && !productImage.ImageUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
         {
             var relativePath = productImage.ImageUrl.TrimStart('~', '/');
             var filePath = Path.Combine(hostingEnvironment.WebRootPath, relativePath.Replace('/', Path.DirectorySeparatorChar));
@@ -108,22 +134,45 @@ public class ProductImageService
         await _productImageRepository.SaveChangesAsync();
     }
 
+    private static void ValidateImageFile(IFormFile imageFile)
+    {
+        if (imageFile.Length == 0)
+        {
+            throw new InvalidOperationException("The selected file is empty.");
+        }
+
+        if (imageFile.Length > MaxImageSizeInBytes)
+        {
+            throw new InvalidOperationException("The selected image must be 5 MB or smaller.");
+        }
+
+        var extension = Path.GetExtension(imageFile.FileName);
+        if (!AllowedExtensions.Contains(extension))
+        {
+            throw new InvalidOperationException("Only JPG, JPEG, PNG, and WEBP image files are allowed.");
+        }
+    }
+
     private static async Task<string> ResolveImageUrlAsync(IFormFile? imageFile, string? imageUrl, IWebHostEnvironment hostingEnvironment)
     {
         if (imageFile is not null && imageFile.Length > 0)
         {
-            var uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "images", "products");
+            ValidateImageFile(imageFile);
+
+            var uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads", "products");
             Directory.CreateDirectory(uploadFolder);
 
-            var fileName = $"{Guid.NewGuid():N}_{Path.GetFileNameWithoutExtension(imageFile.FileName)}{Path.GetExtension(imageFile.FileName)}";
-            var filePath = Path.Combine(uploadFolder, fileName);
+            var extension = Path.GetExtension(imageFile.FileName);
+            var fileName = $"{Guid.NewGuid():N}_{Path.GetFileNameWithoutExtension(imageFile.FileName)}{extension}";
+            var safeName = string.Concat(fileName.Where(ch => !Path.GetInvalidFileNameChars().Contains(ch)));
+            var filePath = Path.Combine(uploadFolder, safeName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await imageFile.CopyToAsync(stream);
             }
 
-            return "/images/products/" + fileName;
+            return "/uploads/products/" + safeName;
         }
 
         if (!string.IsNullOrWhiteSpace(imageUrl))

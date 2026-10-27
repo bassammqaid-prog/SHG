@@ -94,6 +94,16 @@ public class ProductImagesController : Controller
         model.ProductId = product.Id;
         model.ProductName = product.Name;
 
+        if (model.ImageFile is null && string.IsNullOrWhiteSpace(model.ImageUrl))
+        {
+            ModelState.AddModelError(string.Empty, "Please upload a file or provide an image URL.");
+        }
+
+        if (model.ImageFile is not null && model.ImageFile.Length == 0)
+        {
+            ModelState.AddModelError(nameof(model.ImageFile), "Please select a valid image file.");
+        }
+
         if (!ModelState.IsValid)
         {
             return View(model);
