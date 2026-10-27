@@ -11,13 +11,15 @@ namespace Al_Shami_ِAISS_.Controllers;
 public class ProjectsController : Controller
 {
     private readonly ProjectService _projectService;
+    private readonly ProjectImageService _projectImageService;
 
     /// <summary>
     /// Initializes the controller using dependency injection.
     /// </summary>
-    public ProjectsController(ProjectService projectService)
+    public ProjectsController(ProjectService projectService, ProjectImageService projectImageService)
     {
         _projectService = projectService;
+        _projectImageService = projectImageService;
     }
 
     /// <summary>
@@ -56,6 +58,8 @@ public class ProjectsController : Controller
             return NotFound();
         }
 
+        var galleryImages = await _projectImageService.GetByProjectIdAsync(project.Id);
+
         var viewModel = new ProjectDetailsViewModel
         {
             Id = project.Id,
@@ -65,7 +69,10 @@ public class ProjectsController : Controller
             ClientName = project.ClientName,
             Location = project.Location,
             CompletionDate = project.CompletionDate,
-            IsFeatured = project.IsFeatured
+            IsFeatured = project.IsFeatured,
+            GalleryImages = galleryImages
+                .Select(image => image.ImageUrl)
+                .ToList()
         };
 
         return View(viewModel);

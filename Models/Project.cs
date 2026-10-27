@@ -46,4 +46,10 @@ public class Project
     /// Indicates whether the project should be presented as a feature highlight.
     /// </summary>
     public bool IsFeatured { get; set; }
+
+    /// <summary>
+    /// Collection of supporting gallery images for this project.
+    /// The project can include a cover image plus multiple additional images for the portfolio section.
+    /// </summary>
+    public ICollection<ProjectImage> ProjectImages { get; set; } = new List<ProjectImage>();
 }

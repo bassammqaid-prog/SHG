@@ -42,6 +42,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Project> Projects { get; set; }
 
     /// <summary>
+    /// Project gallery images table.
+    /// </summary>
+    public DbSet<ProjectImage> ProjectImages { get; set; }
+
+    /// <summary>
     /// Quote requests table for leads.
     /// </summary>
     public DbSet<QuoteRequest> QuoteRequests { get; set; }
@@ -78,6 +83,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey(pi => pi.ProductId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // The Project -> ProjectImage relationship is another one-to-many relationship:
+        // one project can have many gallery images, and each gallery image belongs to one project.
+        // We use cascade delete because the images are dependent on the project record and should disappear
+        // automatically if the project is removed from the database.
+        modelBuilder.Entity<Project>()
+            .HasMany(p => p.ProjectImages)
+            .WithOne(pi => pi.Project)
+            .HasForeignKey(pi => pi.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         // We intentionally restrict deleting a category when products still exist.
         // This protects data integrity and prevents orphaned products from being lost.
         // If a category is deleted, the system will block the delete and require the
@@ -101,6 +116,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<Product>().ToTable("Products");
         modelBuilder.Entity<ProductImage>().ToTable("ProductImages");
         modelBuilder.Entity<Project>().ToTable("Projects");
+        modelBuilder.Entity<ProjectImage>().ToTable("ProjectImages");
         modelBuilder.Entity<QuoteRequest>().ToTable("QuoteRequests");
         modelBuilder.Entity<ContactMessage>().ToTable("ContactMessages");
 
@@ -137,6 +153,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .Property(p => p.Title)
             .IsRequired()
             .HasMaxLength(200);
+
+        modelBuilder.Entity<ProjectImage>()
+            .Property(pi => pi.ImageUrl)
+            .IsRequired();
 
         modelBuilder.Entity<QuoteRequest>()
             .Property(q => q.FullName)

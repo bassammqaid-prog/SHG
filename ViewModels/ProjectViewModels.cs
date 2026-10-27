@@ -34,4 +34,5 @@ public class ProjectDetailsViewModel
     public string? Location { get; set; }
     public DateTime? CompletionDate { get; set; }
     public bool IsFeatured { get; set; }
+    public List<string> GalleryImages { get; set; } = new();
 }
