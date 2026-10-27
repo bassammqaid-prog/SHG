@@ -1,6 +1,7 @@
 using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
 using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
@@ -11,6 +12,7 @@ namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
 /// This keeps the controller focused on HTTP actions while the service handles validation and database orchestration.
 /// </summary>
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class CategoriesController : Controller
 {
     private readonly CategoryService _categoryService;

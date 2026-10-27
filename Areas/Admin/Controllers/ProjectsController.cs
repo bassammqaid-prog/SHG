@@ -1,6 +1,7 @@
 using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
 using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
@@ -10,6 +11,7 @@ namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
 /// The controller passes data to the service layer, which keeps business work separate from the UI.
 /// </summary>
 [Area("Admin")]
+[Authorize(Roles = "Admin,Manager")]
 public class ProjectsController : Controller
 {
     private readonly ProjectService _projectService;

@@ -1,7 +1,9 @@
 using Al_Shami_ِAISS_.Data;
+using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Repositories.Implementations;
 using Al_Shami_ِAISS_.Repositories.Interfaces;
 using Al_Shami_ِAISS_.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 // ASP.NET Core reads configuration values from appsettings.json and environment-specific files.
@@ -26,6 +28,33 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// ASP.NET Core Identity adds the user, role, claim, and login stores required for authentication and authorization.
+// This is the security layer used to protect admin pages and staff-only features.
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 8;
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+// Cookie-based authentication keeps the user signed in across requests by storing a secure encrypted cookie.
+// The configured cookie settings help protect the app from unauthorized access and support the remember-me feature.
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.ExpireTimeSpan = TimeSpan.FromDays(14);
+    options.SlidingExpiration = true;
+});
+
 // Repositories are registered as scoped services. A scoped lifetime means each HTTP request
 // receives its own instance, which helps keep state isolated and predictable.
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -43,6 +72,7 @@ builder.Services.AddScoped<ProductImageService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ContactMessageService>();
 builder.Services.AddScoped<QuoteRequestService>();
+builder.Services.AddScoped<IdentitySeedService>();
 
 var app = builder.Build();
 
@@ -63,6 +93,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+// Authentication must be invoked before authorization so the application can determine who the visitor is.
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -76,5 +109,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+using (var scope = app.Services.CreateScope())
+{
+    var identitySeedService = scope.ServiceProvider.GetRequiredService<IdentitySeedService>();
+    await identitySeedService.InitializeAsync();
+}
 
 app.Run();

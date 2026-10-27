@@ -1,21 +1,21 @@
 using Al_Shami_ِAISS_.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Al_Shami_ِAISS_.Data;
 
 /// <summary>
-/// The main EF Core database context used by the application.
-/// It is the central gateway to SQL Server and encapsulates the entity model.
-/// Every repository eventually works through this class, which keeps the application
-/// consistent with the repository and service architecture.
+/// The main EF Core database context for the application.
+/// It extends <see cref="IdentityDbContext{TUser}"/> so ASP.NET Core Identity can store its tables alongside the business tables.
+/// This keeps user data, roles, claims, and the application's domain data in the same SQL Server database.
 /// </summary>
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class.
-    /// The ASP.NET Core dependency injection container injects the DbContext options.
+    /// ASP.NET Core dependency injection supplies the SQL Server configuration and Identity options.
     /// </summary>
-    /// <param name="options">Configuration options used by EF Core, such as the SQL Server connection.</param>
+    /// <param name="options">Configuration options used by EF Core and ASP.NET Core Identity.</param>
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
@@ -86,6 +86,15 @@ public class ApplicationDbContext : DbContext
         // We use cascading delete for images because product images are dependent data.
         // If a product is deleted, its gallery images should also be deleted automatically.
         // This avoids orphaned image records in the database.
+
+        // Identity tables are created by ASP.NET Core Identity and include these main sets:
+        // AspNetUsers -> user accounts and profile data
+        // AspNetRoles -> roles such as Admin and Manager
+        // AspNetUserRoles -> assignments between users and roles
+        // AspNetUserClaims -> user-specific claim data
+        // AspNetRoleClaims -> role-specific claim data
+        // AspNetUserLogins -> external login providers
+        // AspNetUserTokens -> security tokens used for password resets, 2FA, and cookie-based flows
 
         // Configure table names and schema conventions for readability.
         modelBuilder.Entity<Category>().ToTable("Categories");

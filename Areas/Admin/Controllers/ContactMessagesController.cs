@@ -1,6 +1,7 @@
 using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
 using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
@@ -10,6 +11,7 @@ namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
 /// It reads submissions from the database and provides create/edit/delete operations.
 /// </summary>
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class ContactMessagesController : Controller
 {
     private readonly ContactMessageService _contactMessageService;

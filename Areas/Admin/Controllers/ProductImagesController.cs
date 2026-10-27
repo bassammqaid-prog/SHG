@@ -1,5 +1,6 @@
 using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
 using Al_Shami_ِAISS_.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
 /// This controller manages the product gallery and keeps file upload logic out of the UI layer.
 /// </summary>
 [Area("Admin")]
+[Authorize(Roles = "Admin,Manager")]
 public class ProductImagesController : Controller
 {
     private readonly ProductImageService _productImageService;

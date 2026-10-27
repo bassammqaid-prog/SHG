@@ -1,6 +1,7 @@
 using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
 using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,6 +12,7 @@ namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
 /// Product-related create, edit, detail, and delete actions all flow through this controller.
 /// </summary>
 [Area("Admin")]
+[Authorize(Roles = "Admin,Manager")]
 public class ProductsController : Controller
 {
     private readonly ProductService _productService;

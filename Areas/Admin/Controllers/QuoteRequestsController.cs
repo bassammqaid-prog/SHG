@@ -1,6 +1,7 @@
 using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
 using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
@@ -10,6 +11,7 @@ namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
 /// The controller orchestrates service calls and prepares ViewModels for the UI.
 /// </summary>
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class QuoteRequestsController : Controller
 {
     private readonly QuoteRequestService _quoteRequestService;
