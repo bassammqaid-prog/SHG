@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+	<value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+	<value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+	<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c9f11d4d2f</value>
+  </resheader>
+  <resheader name="writer">
+	<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c9f11d4d2f</value>
+  </resheader>
+  <data name="Home" xml:space="preserve"><value>الرئيسية</value></data>
+  <data name="About" xml:space="preserve"><value>من نحن</value></data>
+  <data name="Products" xml:space="preserve"><value>المنتجات</value></data>
+  <data name="Projects" xml:space="preserve"><value>المشاريع</value></data>
+  <data name="Contact" xml:space="preserve"><value>تواصل معنا</value></data>
+  <data name="RequestQuote" xml:space="preserve"><value>طلب عرض سعر</value></data>
+  <data name="Login" xml:space="preserve"><value>تسجيل الدخول</value></data>
+  <data name="Logout" xml:space="preserve"><value>تسجيل الخروج</value></data>
+  <data name="Dashboard" xml:space="preserve"><value>لوحة التحكم</value></data>
+  <data name="Email" xml:space="preserve"><value>البريد الإلكتروني</value></data>
+  <data name="Password" xml:space="preserve"><value>كلمة المرور</value></data>
+  <data name="RememberMe" xml:space="preserve"><value>تذكرني</value></data>
+  <data name="Save" xml:space="preserve"><value>حفظ</value></data>
+  <data name="Delete" xml:space="preserve"><value>حذف</value></data>
+  <data name="Cancel" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="FieldIsRequired" xml:space="preserve"><value>الحقل مطلوب.</value></data>
+  <data name="InvalidEmail" xml:space="preserve"><value>البريد الإلكتروني غير صالح.</value></data>
+  <data name="InvalidLength" xml:space="preserve"><value>طول النص غير صحيح.</value></data>
+  <data name="SavedSuccessfully" xml:space="preserve"><value>تم الحفظ بنجاح.</value></data>
+  <data name="DeletedSuccessfully" xml:space="preserve"><value>تم الحذف بنجاح.</value></data>
+</root>

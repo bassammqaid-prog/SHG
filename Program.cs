@@ -1,10 +1,14 @@
+using System.Globalization;
 using Al_Shami_ِAISS_.Data;
 using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Repositories.Implementations;
 using Al_Shami_ِAISS_.Repositories.Interfaces;
+using Al_Shami_ِAISS_.Resources;
 using Al_Shami_ِAISS_.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 // ASP.NET Core reads configuration values from appsettings.json and environment-specific files.
 // This keeps sensitive or environment-specific settings out of code and makes deployment easier.
@@ -21,9 +25,37 @@ if (string.IsNullOrWhiteSpace(connectionString))
     throw new InvalidOperationException("The 'DefaultConnection' connection string is missing. Configure it in appsettings.json.");
 }
 
+// ASP.NET Core localization is configured before the MVC pipeline so the application can resolve
+// translated strings and validation messages based on the current culture.
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 // Add MVC support to the application so controllers and views can be used.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource));
+    });
 builder.Services.AddHttpContextAccessor();
+
+var supportedCultures = new[]
+{
+    new CultureInfo("ar-YE"),
+    new CultureInfo("en-US")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("ar-YE");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders = new IRequestCultureProvider[]
+    {
+        new QueryStringRequestCultureProvider(),
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    };
+});
 
 // The DbContext is registered with SQL Server so every repository can use the same database connection.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -100,6 +132,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseRouting();
 
 // Authentication must be invoked before authorization so the application can determine who the visitor is.
