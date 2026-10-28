@@ -164,6 +164,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .Property(pi => pi.ImageUrl)
             .IsRequired();
 
+        modelBuilder.Entity<ProjectImage>()
+            .Property(pi => pi.CreatedAt)
+            .HasDefaultValueSql("GETUTCDATE()");
+
         modelBuilder.Entity<ActivityLog>()
             .Property(log => log.Action)
             .IsRequired()

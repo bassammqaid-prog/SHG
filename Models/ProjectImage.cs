@@ -24,6 +24,12 @@ public class ProjectImage
     public int ProjectId { get; set; }
 
     /// <summary>
+    /// The date and time when this gallery image was first created.
+    /// This audit value helps identify when a project image was uploaded and supports ordering in the admin UI.
+    /// </summary>
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
     /// Navigation property used by EF Core to traverse back to the project.
     /// This allows the ORM to materialize the related project when the gallery is loaded.
     /// </summary>

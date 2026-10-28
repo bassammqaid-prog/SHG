@@ -98,7 +98,8 @@ public class ProjectImageService
         var projectImage = new ProjectImage
         {
             ProjectId = projectId,
-            ImageUrl = storedImageUrl
+            ImageUrl = storedImageUrl,
+            CreatedAt = DateTime.UtcNow
         };
 
         await _projectImageRepository.AddAsync(projectImage);
