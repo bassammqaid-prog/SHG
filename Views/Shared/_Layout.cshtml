@@ -4,12 +4,27 @@
 @using Microsoft.Extensions.Localization
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @inject IStringLocalizer<SharedResource> Localizer
+
+
 @{
     var requestCulture = HttpContextAccessor.HttpContext?.Features.Get<IRequestCultureFeature>()?.RequestCulture;
     var currentCulture = requestCulture?.Culture ?? CultureInfo.CurrentCulture;
     var isRtl = currentCulture.Name.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
     var currentCultureName = currentCulture.Name;
+
+    var returnUrl =
+        Context.Request.Path +
+        Context.Request.QueryString;
 }
+
+
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="@currentCultureName" dir="@(isRtl ? "rtl" : "ltr")">
@@ -22,6 +37,10 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="bg-light @(isRtl ? "rtl-body" : "ltr-body")">
+    <div style="background:red;color:white;padding:10px;font-weight:bold">
+        Culture = @System.Globalization.CultureInfo.CurrentUICulture.Name
+    </div>
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container">
@@ -106,10 +125,13 @@
                         <li class="nav-item ms-lg-3 dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@currentCulture.NativeName</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="ar-YE" asp-route-returnUrl="@Context.Request.Path + Context.Request.QueryString">العربية</a></li>
-                                <li><a class="dropdown-item" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en-US" asp-route-returnUrl="@Context.Request.Path + Context.Request.QueryString">English</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="ar-YE" asp-route-returnUrl="@returnUrl">العربية</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en-US" asp-route-returnUrl="@returnUrl">English</a></li>
                             </ul>
                         </li>
+
+
+
                     </ul>
                 </div>
             </div>

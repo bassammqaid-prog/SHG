@@ -21,6 +21,12 @@
   <data name="Login" xml:space="preserve"><value>تسجيل الدخول</value></data>
   <data name="Logout" xml:space="preserve"><value>تسجيل الخروج</value></data>
   <data name="Dashboard" xml:space="preserve"><value>لوحة التحكم</value></data>
+  <data name="Categories" xml:space="preserve"><value>الفئات</value></data>
+  <data name="Messages" xml:space="preserve"><value>الرسائل</value></data>
+  <data name="Quotes" xml:space="preserve"><value>العروض</value></data>
+  <data name="ActivityLogs" xml:space="preserve"><value>سجل النشاط</value></data>
+  <data name="CompanyIntro" xml:space="preserve"><value>مزود موثوق للحلول الصناعية والطاقة لقطاع الأعمال والصناعة والبنية التحتية.</value></data>
+  <data name="QuickLinks" xml:space="preserve"><value>روابط سريعة</value></data>
   <data name="Email" xml:space="preserve"><value>البريد الإلكتروني</value></data>
   <data name="Password" xml:space="preserve"><value>كلمة المرور</value></data>
   <data name="RememberMe" xml:space="preserve"><value>تذكرني</value></data>
