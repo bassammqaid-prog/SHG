@@ -37,8 +37,17 @@ public class ProjectImageCreateViewModel
     [Display(Name = "Project")]
     public string ProjectTitle { get; set; } = string.Empty;
 
+    [Display(Name = "Upload File From Computer")]
+    public IFormFile? UploadedFile { get; set; }
+
+    // Maintain compatibility with existing form binding while exposing the clearer UploadedFile property
+    // required for the project gallery upload flow.
     [Display(Name = "Image File")]
-    public IFormFile? ImageFile { get; set; }
+    public IFormFile? ImageFile
+    {
+        get => UploadedFile;
+        set => UploadedFile = value;
+    }
 
     [Url(ErrorMessage = "Please provide a valid image URL.")]
     [Display(Name = "Image URL")]

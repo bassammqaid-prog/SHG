@@ -18,33 +18,19 @@
             <form asp-area="Admin" asp-controller="ProductImages" asp-action="Create" asp-route-productId="@Model.ProductId" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="mb-3">
-                            <label asp-for="ImageFile" class="form-label"></label>
-                            <input asp-for="ImageFile" id="imageUpload" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
-                            <span asp-validation-for="ImageFile" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="ImageUrl" class="form-label"></label>
-                            <input asp-for="ImageUrl" id="imageUrl" class="form-control" placeholder="https://example.com/image.jpg" />
-                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="border rounded p-3 bg-light">
-                            <label class="form-label fw-semibold">Preview</label>
-                            <div id="imagePreviewWrap" class="d-none text-center">
-                                <img id="imagePreview" src="" alt="Selected preview" class="img-fluid rounded border" style="max-height: 280px; object-fit: cover;" />
-                            </div>
-                            <div id="previewPlaceholder" class="text-muted small">Select a file or enter a URL to preview the image.</div>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label"></label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
 
-                <div class="d-flex gap-2 mt-3">
+                <div class="mb-3">
+                    <label asp-for="ImageUrl" class="form-label"></label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">Save Image</button>
                     <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">Cancel</a>
                 </div>
@@ -55,42 +41,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
-    <script>
-        const imageUpload = document.getElementById('imageUpload');
-        const imageUrl = document.getElementById('imageUrl');
-        const imagePreview = document.getElementById('imagePreview');
-        const imagePreviewWrap = document.getElementById('imagePreviewWrap');
-        const previewPlaceholder = document.getElementById('previewPlaceholder');
-
-        function showPreview(source) {
-            imagePreview.src = source;
-            imagePreviewWrap.classList.remove('d-none');
-            previewPlaceholder.classList.add('d-none');
-        }
-
-        if (imageUpload) {
-            imageUpload.addEventListener('change', function () {
-                const file = this.files && this.files[0];
-                if (!file) {
-                    imagePreview.src = '';
-                    imagePreviewWrap.classList.add('d-none');
-                    previewPlaceholder.classList.remove('d-none');
-                    return;
-                }
-
-                const objectUrl = URL.createObjectURL(file);
-                showPreview(objectUrl);
-            });
-        }
-
-        if (imageUrl) {
-            imageUrl.addEventListener('input', function () {
-                const url = this.value.trim();
-                if (url) {
-                    showPreview(url);
-                }
-            });
-        }
-    </script>
 }

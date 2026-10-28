@@ -95,14 +95,14 @@ public class ProjectImagesController : Controller
         model.ProjectId = project.Id;
         model.ProjectTitle = project.Title;
 
-        if (model.ImageFile is null && string.IsNullOrWhiteSpace(model.ImageUrl))
+        if (model.UploadedFile is null && string.IsNullOrWhiteSpace(model.ImageUrl))
         {
             ModelState.AddModelError(string.Empty, "Please upload a file or provide an image URL.");
         }
 
-        if (model.ImageFile is not null && model.ImageFile.Length == 0)
+        if (model.UploadedFile is not null && model.UploadedFile.Length == 0)
         {
-            ModelState.AddModelError(nameof(model.ImageFile), "Please select a valid image file.");
+            ModelState.AddModelError(nameof(model.UploadedFile), "Please select a valid image file.");
         }
 
         if (!ModelState.IsValid)
@@ -112,7 +112,7 @@ public class ProjectImagesController : Controller
 
         try
         {
-            await _projectImageService.AddAsync(projectId, model.ImageFile, model.ImageUrl, _hostingEnvironment);
+            await _projectImageService.AddAsync(projectId, model.UploadedFile, model.ImageUrl, _hostingEnvironment);
             TempData["SuccessMessage"] = "Project image uploaded successfully.";
             return RedirectToAction(nameof(Index), new { projectId });
         }
