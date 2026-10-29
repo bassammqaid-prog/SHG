@@ -1,0 +1,201 @@
+@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.Reports.ReportsDashboardViewModel
+
+@{
+    ViewData["Title"] = "التقارير";
+}
+
+<section class="py-5">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <div>
+                <h1 class="h3 fw-bold mb-1">لوحة التقارير</h1>
+                <p class="text-muted mb-0">مؤشرات الأداء والتصدير السريع للبيانات الأساسية.</p>
+            </div>
+            <div class="btn-group" role="group">
+                <a asp-action="ExportProductsToExcel" class="btn btn-success">تصدير Excel</a>
+                <a asp-action="ExportProductsToCsv" class="btn btn-outline-secondary">تصدير CSV</a>
+                <a asp-action="ExportProductsSummaryToPdf" class="btn btn-danger">تصدير PDF</a>
+            </div>
+        </div>
+
+        <form method="get" asp-action="Index" class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label">من تاريخ</label>
+                        <input asp-for="DateFrom" type="date" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">إلى تاريخ</label>
+                        <input asp-for="DateTo" type="date" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">الفئة</label>
+                        <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">المشروع</label>
+                        <select asp-for="ProjectId" asp-items="Model.Projects" class="form-select"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">المستخدم</label>
+                        <select asp-for="UserId" asp-items="Model.Users" class="form-select"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">نوع النشاط</label>
+                        <select asp-for="ActivityType" asp-items="Model.ActivityTypes" class="form-select"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100">تطبيق الفلاتر</button>
+                    </div>
+                    <div class="col-md-3">
+                        <a asp-action="Index" class="btn btn-outline-secondary w-100">إعادة التعيين</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6 col-xl-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">إجمالي المنتجات</div>
+                                <h2 class="mb-0">@Model.TotalProducts</h2>
+                            </div>
+                            <span class="badge bg-primary-subtle text-primary rounded-pill p-3 fs-5">📦</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">إجمالي المشاريع</div>
+                                <h2 class="mb-0">@Model.TotalProjects</h2>
+                            </div>
+                            <span class="badge bg-success-subtle text-success rounded-pill p-3 fs-5">🏗️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">إجمالي الفئات</div>
+                                <h2 class="mb-0">@Model.TotalCategories</h2>
+                            </div>
+                            <span class="badge bg-warning-subtle text-warning rounded-pill p-3 fs-5">🏷️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">إجمالي المستخدمين</div>
+                                <h2 class="mb-0">@Model.TotalUsers</h2>
+                            </div>
+                            <span class="badge bg-info-subtle text-info rounded-pill p-3 fs-5">👥</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">إجمالي رسائل التواصل</div>
+                                <h2 class="mb-0">@Model.TotalContactMessages</h2>
+                            </div>
+                            <span class="badge bg-secondary-subtle text-secondary rounded-pill p-3 fs-5">✉️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">إجمالي طلبات العروض</div>
+                                <h2 class="mb-0">@Model.TotalQuoteRequests</h2>
+                            </div>
+                            <span class="badge bg-danger-subtle text-danger rounded-pill p-3 fs-5">📄</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">إجمالي سجل النشاط</div>
+                                <h2 class="mb-0">@Model.TotalActivityLogs</h2>
+                            </div>
+                            <span class="badge bg-dark-subtle text-dark rounded-pill p-3 fs-5">📊</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white border-0 fw-semibold">مركز التصدير</div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6 col-xl-4">
+                        <div class="d-grid gap-2">
+                            <a asp-action="ExportProductsToExcel" class="btn btn-outline-success">تصدير المنتجات إلى Excel</a>
+                            <a asp-action="ExportProductsToCsv" class="btn btn-outline-secondary">تصدير المنتجات إلى CSV</a>
+                            <a asp-action="ExportProductsSummaryToPdf" class="btn btn-outline-danger">تصدير ملخص المنتجات إلى PDF</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="d-grid gap-2">
+                            <a asp-action="ExportProjectsToExcel" class="btn btn-outline-success">تصدير المشاريع إلى Excel</a>
+                            <a asp-action="ExportProjectsToCsv" class="btn btn-outline-secondary">تصدير المشاريع إلى CSV</a>
+                            <a asp-action="ExportProjectsSummaryToPdf" class="btn btn-outline-danger">تصدير ملخص المشاريع إلى PDF</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="d-grid gap-2">
+                            <a asp-action="ExportCategoriesToExcel" class="btn btn-outline-success">تصدير الفئات إلى Excel</a>
+                            <a asp-action="ExportContactMessagesToExcel" class="btn btn-outline-success">تصدير الرسائل إلى Excel</a>
+                            <a asp-action="ExportContactMessagesToPdf" class="btn btn-outline-danger">تصدير الرسائل إلى PDF</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="d-grid gap-2">
+                            <a asp-action="ExportQuoteRequestsToExcel" class="btn btn-outline-success">تصدير طلبات العروض إلى Excel</a>
+                            <a asp-action="ExportQuotesToCsv" class="btn btn-outline-secondary">تصدير طلبات العروض إلى CSV</a>
+                            <a asp-action="ExportQuoteRequestsToPdf" class="btn btn-outline-danger">تصدير طلبات العروض إلى PDF</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="d-grid gap-2">
+                            <a asp-action="ExportActivityLogsToExcel" class="btn btn-outline-success">تصدير سجل النشاط إلى Excel</a>
+                            <a asp-action="ExportActivityLogsToCsv" class="btn btn-outline-secondary">تصدير سجل النشاط إلى CSV</a>
+                            <a asp-action="ExportActivityLogsToPdf" class="btn btn-outline-danger">تصدير سجل النشاط إلى PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -43,6 +43,12 @@ public class Project
     public DateTime? CompletionDate { get; set; }
 
     /// <summary>
+    /// Date and time when the project record was created.
+    /// This is used for reporting, sorting, and audit history.
+    /// </summary>
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
     /// Indicates whether the project should be presented as a feature highlight.
     /// </summary>
     public bool IsFeatured { get; set; }

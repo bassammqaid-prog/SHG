@@ -108,6 +108,7 @@ builder.Services.AddScoped<ProjectImageService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ContactMessageService>();
 builder.Services.AddScoped<QuoteRequestService>();
+builder.Services.AddScoped<ReportingService>();
 builder.Services.AddScoped<IActivityLogService, ActivityLogService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IdentitySeedService>();
