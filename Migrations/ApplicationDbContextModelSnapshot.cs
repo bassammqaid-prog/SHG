@@ -150,6 +150,9 @@ namespace Al_Shami_ِAISS_.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CanonicalUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -159,10 +162,23 @@ namespace Al_Shami_ِAISS_.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -175,7 +191,8 @@ namespace Al_Shami_ِAISS_.Migrations
                             CreatedAt = new DateTime(2025, 1, 15, 9, 0, 0, 0, DateTimeKind.Utc),
                             Description = "High-performance electrical solutions for industrial and commercial applications.",
                             IsActive = true,
-                            Name = "Electrical"
+                            Name = "Electrical",
+                            Slug = ""
                         },
                         new
                         {
@@ -183,7 +200,8 @@ namespace Al_Shami_ِAISS_.Migrations
                             CreatedAt = new DateTime(2025, 1, 15, 9, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Reliable water systems, fittings, and flow-control products.",
                             IsActive = true,
-                            Name = "Plumbing"
+                            Name = "Plumbing",
+                            Slug = ""
                         },
                         new
                         {
@@ -191,7 +209,8 @@ namespace Al_Shami_ِAISS_.Migrations
                             CreatedAt = new DateTime(2025, 1, 15, 9, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Climate control units and energy-efficient air treatment products.",
                             IsActive = true,
-                            Name = "HVAC"
+                            Name = "HVAC",
+                            Slug = ""
                         },
                         new
                         {
@@ -199,7 +218,8 @@ namespace Al_Shami_ِAISS_.Migrations
                             CreatedAt = new DateTime(2025, 1, 15, 9, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Commercial and residential lighting solutions with durable performance.",
                             IsActive = true,
-                            Name = "Lighting"
+                            Name = "Lighting",
+                            Slug = ""
                         },
                         new
                         {
@@ -207,7 +227,8 @@ namespace Al_Shami_ِAISS_.Migrations
                             CreatedAt = new DateTime(2025, 1, 15, 9, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Protection, fire response, and monitoring equipment for safe operations.",
                             IsActive = true,
-                            Name = "Safety"
+                            Name = "Safety",
+                            Slug = ""
                         });
                 });
 
@@ -259,6 +280,9 @@ namespace Al_Shami_ِAISS_.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CanonicalUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -274,6 +298,15 @@ namespace Al_Shami_ِAISS_.Migrations
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ModelNumber")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -286,6 +319,10 @@ namespace Al_Shami_ِAISS_.Migrations
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
@@ -309,6 +346,7 @@ namespace Al_Shami_ِAISS_.Migrations
                             ModelNumber = "CB-240-A",
                             Name = "Smart Circuit Breaker",
                             Price = 245.00m,
+                            Slug = "",
                             StockQuantity = 32
                         },
                         new
@@ -323,6 +361,7 @@ namespace Al_Shami_ِAISS_.Migrations
                             ModelNumber = "PF-118",
                             Name = "Industrial Pipe Fitting",
                             Price = 98.50m,
+                            Slug = "",
                             StockQuantity = 48
                         },
                         new
@@ -337,6 +376,7 @@ namespace Al_Shami_ِAISS_.Migrations
                             ModelNumber = "HVAC-5500",
                             Name = "Commercial Air Conditioner",
                             Price = 1850.00m,
+                            Slug = "",
                             StockQuantity = 12
                         },
                         new
@@ -351,6 +391,7 @@ namespace Al_Shami_ِAISS_.Migrations
                             ModelNumber = "LP-40W",
                             Name = "LED Panel Light",
                             Price = 135.00m,
+                            Slug = "",
                             StockQuantity = 64
                         },
                         new
@@ -365,6 +406,7 @@ namespace Al_Shami_ِAISS_.Migrations
                             ModelNumber = "FA-88",
                             Name = "Fire Alarm Sensor",
                             Price = 86.00m,
+                            Slug = "",
                             StockQuantity = 90
                         },
                         new
@@ -379,6 +421,7 @@ namespace Al_Shami_ِAISS_.Migrations
                             ModelNumber = "SOL-3K",
                             Name = "Solar Power Inverter",
                             Price = 640.00m,
+                            Slug = "",
                             StockQuantity = 20
                         },
                         new
@@ -393,6 +436,7 @@ namespace Al_Shami_ِAISS_.Migrations
                             ModelNumber = "WP-220",
                             Name = "Water Pump Unit",
                             Price = 420.00m,
+                            Slug = "",
                             StockQuantity = 18
                         });
                 });
@@ -427,6 +471,9 @@ namespace Al_Shami_ِAISS_.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CanonicalUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ClientName")
                         .HasColumnType("nvarchar(max)");
 
@@ -446,6 +493,19 @@ namespace Al_Shami_ِAISS_.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
