@@ -41,6 +41,13 @@ public interface IProductRepository
     void Delete(Product product);
 
     /// <summary>
+    /// Retrieves a product using its SEO-friendly URL slug.
+    /// </summary>
+    /// <param name="slug">The URL slug to find.</param>
+    /// <returns>The matching product or null.</returns>
+    Task<Product?> GetBySlugAsync(string slug);
+
+    /// <summary>
     /// Saves all pending changes to the underlying database.
     /// </summary>
     /// <returns>The number of state entries written.</returns>

@@ -29,6 +29,11 @@ public class HomeController : Controller
     /// </summary>
     public async Task<IActionResult> Index()
     {
+        ViewData["Title"] = "الرئيسية";
+        ViewData["MetaTitle"] = "AISS | حلول صناعية وتوريد";
+        ViewData["MetaDescription"] = "AISS تقدم حلولاً صناعية وتقنية وتوريدية متكاملة للمشاريع التجارية والصناعية.";
+        ViewData["MetaKeywords"] = "AISS, حلول صناعية, توريد, مشاريع, كهرباء";
+
         var categories = (await _categoryService.GetAllAsync())
             .Where(c => c.IsActive)
             .Take(4)
@@ -100,6 +105,10 @@ public class HomeController : Controller
     /// </summary>
     public IActionResult About()
     {
+        ViewData["Title"] = "من نحن";
+        ViewData["MetaTitle"] = "من نحن | AISS";
+        ViewData["MetaDescription"] = "تعرف على رؤية AISS ومهامها في تقديم حلول صناعية وتجارية موثوقة.";
+        ViewData["MetaKeywords"] = "من نحن, AISS, رؤية, حلول";
         return View();
     }
 
@@ -108,6 +117,10 @@ public class HomeController : Controller
     /// </summary>
     public IActionResult Privacy()
     {
+        ViewData["Title"] = "سياسة الخصوصية";
+        ViewData["MetaTitle"] = "سياسة الخصوصية | AISS";
+        ViewData["MetaDescription"] = "اقرأ سياسة الخصوصية الخاصة بـ AISS وكيفية تعاملنا مع بيانات المستخدمين.";
+        ViewData["MetaKeywords"] = "سياسة الخصوصية, AISS";
         return View();
     }
 }

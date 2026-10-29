@@ -119,6 +119,11 @@ public class ProductsController : Controller
             StockQuantity = model.StockQuantity,
             IsFeatured = model.IsFeatured,
             CategoryId = model.CategoryId,
+            MetaTitle = string.IsNullOrWhiteSpace(model.MetaTitle) ? model.Name : model.MetaTitle,
+            MetaDescription = model.MetaDescription,
+            MetaKeywords = model.MetaKeywords,
+            Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Name) : model.Slug,
+            CanonicalUrl = $"/products/{SeoSlugService.GenerateSlug(model.Slug ?? model.Name)}",
             CreatedAt = DateTime.UtcNow
         };
 
@@ -150,6 +155,10 @@ public class ProductsController : Controller
             StockQuantity = product.StockQuantity,
             IsFeatured = product.IsFeatured,
             CategoryId = product.CategoryId,
+            MetaTitle = product.MetaTitle,
+            MetaDescription = product.MetaDescription,
+            MetaKeywords = product.MetaKeywords,
+            Slug = product.Slug,
             CategoryOptions = await GetCategorySelectListAsync()
         };
 
@@ -185,6 +194,11 @@ public class ProductsController : Controller
         product.StockQuantity = model.StockQuantity;
         product.IsFeatured = model.IsFeatured;
         product.CategoryId = model.CategoryId;
+        product.MetaTitle = string.IsNullOrWhiteSpace(model.MetaTitle) ? model.Name : model.MetaTitle;
+        product.MetaDescription = model.MetaDescription;
+        product.MetaKeywords = model.MetaKeywords;
+        product.Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Name) : model.Slug;
+        product.CanonicalUrl = $"/products/{product.Slug}";
 
         await _productService.UpdateAsync(product);
         TempData["SuccessMessage"] = "Product updated successfully.";

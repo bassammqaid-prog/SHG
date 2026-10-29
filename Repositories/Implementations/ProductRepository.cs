@@ -43,6 +43,21 @@ public class ProductRepository : IProductRepository
     }
 
     /// <inheritdoc />
+    public async Task<Product?> GetBySlugAsync(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+        {
+            return null;
+        }
+
+        return await _context.Products
+            .AsNoTracking()
+            .Include(p => p.Category)
+            .Include(p => p.ProductImages)
+            .FirstOrDefaultAsync(p => p.Slug == slug);
+    }
+
+    /// <inheritdoc />
     public async Task AddAsync(Product product)
     {
         await _context.Products.AddAsync(product);

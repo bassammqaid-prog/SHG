@@ -122,6 +122,21 @@ public class ProductCreateViewModel
     [Display(Name = "Category")]
     public int CategoryId { get; set; }
 
+    [Display(Name = "Meta Title")]
+    [StringLength(160, ErrorMessage = "Meta title cannot exceed 160 characters.")]
+    public string? MetaTitle { get; set; }
+
+    [Display(Name = "Meta Description")]
+    [StringLength(300, ErrorMessage = "Meta description cannot exceed 300 characters.")]
+    public string? MetaDescription { get; set; }
+
+    [Display(Name = "Meta Keywords")]
+    public string? MetaKeywords { get; set; }
+
+    [Display(Name = "Slug")]
+    [RegularExpression("^[a-z0-9]+(?:-[a-z0-9]+)*$", ErrorMessage = "Slug must use lowercase letters, numbers, and hyphens only.")]
+    public string? Slug { get; set; }
+
     public List<SelectListItem> CategoryOptions { get; set; } = new();
 }
 
@@ -167,6 +182,21 @@ public class ProductEditViewModel
     [Required(ErrorMessage = "Please select a category.")]
     [Display(Name = "Category")]
     public int CategoryId { get; set; }
+
+    [Display(Name = "Meta Title")]
+    [StringLength(160, ErrorMessage = "Meta title cannot exceed 160 characters.")]
+    public string? MetaTitle { get; set; }
+
+    [Display(Name = "Meta Description")]
+    [StringLength(300, ErrorMessage = "Meta description cannot exceed 300 characters.")]
+    public string? MetaDescription { get; set; }
+
+    [Display(Name = "Meta Keywords")]
+    public string? MetaKeywords { get; set; }
+
+    [Display(Name = "Slug")]
+    [RegularExpression("^[a-z0-9]+(?:-[a-z0-9]+)*$", ErrorMessage = "Slug must use lowercase letters, numbers, and hyphens only.")]
+    public string? Slug { get; set; }
 
     public List<SelectListItem> CategoryOptions { get; set; } = new();
 }

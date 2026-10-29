@@ -20,6 +20,11 @@ public interface IProjectRepository
     Task<Project?> GetByIdAsync(int id);
 
     /// <summary>
+    /// Retrieves a project by its SEO-friendly URL slug.
+    /// </summary>
+    Task<Project?> GetBySlugAsync(string slug);
+
+    /// <summary>
     /// Adds a new project to the underlying data store.
     /// </summary>
     Task AddAsync(Project project);

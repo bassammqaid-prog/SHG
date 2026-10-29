@@ -43,6 +43,16 @@ public class ProductService
     }
 
     /// <summary>
+    /// Finds a product using its SEO-friendly slug.
+    /// </summary>
+    /// <param name="slug">The public URL slug.</param>
+    /// <returns>The matching product if found; otherwise null.</returns>
+    public async Task<Product?> GetBySlugAsync(string slug)
+    {
+        return await _productRepository.GetBySlugAsync(slug);
+    }
+
+    /// <summary>
     /// Creates a product and saves it to the database.
     /// This is where rules such as required fields or validation can live.
     /// </summary>
@@ -69,6 +79,12 @@ public class ProductService
         {
             throw new InvalidOperationException("Product price cannot be negative.");
         }
+
+        product.Slug = await SeoSlugService.EnsureUniqueSlugAsync(product.Name, async slug => await _productRepository.GetBySlugAsync(slug) != null);
+        product.CanonicalUrl = $"/products/{product.Slug}";
+        product.MetaTitle ??= product.Name;
+        product.MetaDescription ??= product.Description;
+        product.MetaKeywords ??= $"{product.Name},{product.Brand},{product.Category?.Name ?? "Product"}";
 
         await _productRepository.AddAsync(product);
         await _productRepository.SaveChangesAsync();
@@ -98,6 +114,12 @@ public class ProductService
         {
             throw new InvalidOperationException("Product price cannot be negative.");
         }
+
+        product.Slug = await SeoSlugService.EnsureUniqueSlugAsync(product.Name, async slug => await _productRepository.GetBySlugAsync(slug) != null, product.Slug);
+        product.CanonicalUrl = $"/products/{product.Slug}";
+        product.MetaTitle ??= product.Name;
+        product.MetaDescription ??= product.Description;
+        product.MetaKeywords ??= $"{product.Name},{product.Brand},{product.Category?.Name ?? "Product"}";
 
         _productRepository.Update(product);
         await _productRepository.SaveChangesAsync();

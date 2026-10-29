@@ -39,6 +39,14 @@ public class ProjectService
     }
 
     /// <summary>
+    /// Retrieves a project using its SEO-friendly slug.
+    /// </summary>
+    public async Task<Project?> GetBySlugAsync(string slug)
+    {
+        return await _projectRepository.GetBySlugAsync(slug);
+    }
+
+    /// <summary>
     /// Creates a new project and saves it.
     /// </summary>
     public async Task<Project> AddAsync(Project project)
@@ -52,6 +60,12 @@ public class ProjectService
         {
             throw new InvalidOperationException("Project title is required.");
         }
+
+        project.Slug = await SeoSlugService.EnsureUniqueSlugAsync(project.Title, async slug => await _projectRepository.GetBySlugAsync(slug) != null);
+        project.CanonicalUrl = $"/projects/{project.Slug}";
+        project.MetaTitle ??= project.Title;
+        project.MetaDescription ??= project.Description;
+        project.MetaKeywords ??= $"{project.Title},{project.ClientName},{project.Location}";
 
         await _projectRepository.AddAsync(project);
         await _projectRepository.SaveChangesAsync();
@@ -75,6 +89,12 @@ public class ProjectService
         {
             throw new InvalidOperationException("Project title is required.");
         }
+
+        project.Slug = await SeoSlugService.EnsureUniqueSlugAsync(project.Title, async slug => await _projectRepository.GetBySlugAsync(slug) != null, project.Slug);
+        project.CanonicalUrl = $"/projects/{project.Slug}";
+        project.MetaTitle ??= project.Title;
+        project.MetaDescription ??= project.Description;
+        project.MetaKeywords ??= $"{project.Title},{project.ClientName},{project.Location}";
 
         _projectRepository.Update(project);
         await _projectRepository.SaveChangesAsync();

@@ -4,6 +4,8 @@ namespace Al_Shami_ِAISS_.Models;
 /// Represents a product category used to organize catalog items.
 /// Each category can contain many products, making it a common grouping for
 /// inventory, pricing, and filtering features across the storefront.
+/// SEO metadata is attached here so category pages can participate in search indexing,
+/// canonical URLs, and friendly browsing URLs without creating a separate domain entity.
 /// </summary>
 public class Category
 {
@@ -41,4 +43,29 @@ public class Category
     /// This enables the one-to-many relationship between Category and Product.
     /// </summary>
     public ICollection<Product> Products { get; set; } = new List<Product>();
+
+    /// <summary>
+    /// SEO title displayed in browser tabs and search engine previews for this category page.
+    /// </summary>
+    public string? MetaTitle { get; set; }
+
+    /// <summary>
+    /// Search engine summary for the category landing page.
+    /// </summary>
+    public string? MetaDescription { get; set; }
+
+    /// <summary>
+    /// Keyword list used to enhance search visibility for the category.
+    /// </summary>
+    public string? MetaKeywords { get; set; }
+
+    /// <summary>
+    /// URL slug used to expose a readable and search-friendly category route.
+    /// </summary>
+    public string Slug { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Canonical URL used to prevent duplicate category content across multiple routes.
+    /// </summary>
+    public string? CanonicalUrl { get; set; }
 }

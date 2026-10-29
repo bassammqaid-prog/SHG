@@ -142,6 +142,55 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+app.MapGet("/sitemap.xml", async (CategoryService categoryService, ProductService productService, ProjectService projectService, HttpContext httpContext) =>
+{
+    var categories = await categoryService.GetAllAsync();
+    var products = await productService.GetAllAsync();
+    var projects = await projectService.GetAllAsync();
+    var baseUrl = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+
+    var sitemap = new System.Text.StringBuilder();
+    sitemap.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    sitemap.AppendLine("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+    sitemap.AppendLine($"  <url><loc>{baseUrl}</loc></url>");
+    sitemap.AppendLine($"  <url><loc>{baseUrl}/About</loc></url>");
+    sitemap.AppendLine($"  <url><loc>{baseUrl}/Products</loc></url>");
+    sitemap.AppendLine($"  <url><loc>{baseUrl}/Projects</loc></url>");
+    sitemap.AppendLine($"  <url><loc>{baseUrl}/Contact</loc></url>");
+
+    foreach (var category in categories.Where(c => c.IsActive))
+    {
+        sitemap.AppendLine($"  <url><loc>{baseUrl}/categories/{category.Slug}</loc></url>");
+    }
+
+    foreach (var product in products.Where(p => p.Category != null))
+    {
+        sitemap.AppendLine($"  <url><loc>{baseUrl}/products/{product.Slug}</loc></url>");
+    }
+
+    foreach (var project in projects)
+    {
+        sitemap.AppendLine($"  <url><loc>{baseUrl}/projects/{project.Slug}</loc></url>");
+    }
+
+    sitemap.AppendLine("</urlset>");
+    return Results.Content(sitemap.ToString(), "application/xml");
+});
+
+app.MapGet("/robots.txt", (HttpContext httpContext) =>
+{
+    var baseUrl = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+    var content = new System.Text.StringBuilder();
+    content.AppendLine("User-agent: *");
+    content.AppendLine("Allow: /");
+    content.AppendLine("Disallow: /Admin/");
+    content.AppendLine("Disallow: /Account/");
+    content.AppendLine("Disallow: /Reports/");
+    content.AppendLine();
+    content.AppendLine($"Sitemap: {baseUrl}/sitemap.xml");
+    return Results.Content(content.ToString(), "text/plain");
+});
+
 app.MapControllerRoute(
     name: "Admin",
     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}")

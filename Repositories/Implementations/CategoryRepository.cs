@@ -44,6 +44,19 @@ public class CategoryRepository : ICategoryRepository
     }
 
     /// <inheritdoc />
+    public async Task<Category?> GetBySlugAsync(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+        {
+            return null;
+        }
+
+        return await _context.Categories
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Slug == slug);
+    }
+
+    /// <inheritdoc />
     public async Task AddAsync(Category category)
     {
         await _context.Categories.AddAsync(category);

@@ -97,7 +97,12 @@ public class ProjectsController : Controller
             ClientName = model.ClientName,
             Location = model.Location,
             CompletionDate = model.CompletionDate,
-            IsFeatured = model.IsFeatured
+            IsFeatured = model.IsFeatured,
+            MetaTitle = string.IsNullOrWhiteSpace(model.MetaTitle) ? model.Title : model.MetaTitle,
+            MetaDescription = model.MetaDescription,
+            MetaKeywords = model.MetaKeywords,
+            Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Title) : model.Slug,
+            CanonicalUrl = $"/projects/{SeoSlugService.GenerateSlug(model.Slug ?? model.Title)}"
         };
 
         await _projectService.AddAsync(project);
@@ -125,7 +130,11 @@ public class ProjectsController : Controller
             ClientName = project.ClientName,
             Location = project.Location,
             CompletionDate = project.CompletionDate,
-            IsFeatured = project.IsFeatured
+            IsFeatured = project.IsFeatured,
+            MetaTitle = project.MetaTitle,
+            MetaDescription = project.MetaDescription,
+            MetaKeywords = project.MetaKeywords,
+            Slug = project.Slug
         };
 
         return View(viewModel);
@@ -156,6 +165,11 @@ public class ProjectsController : Controller
         project.Location = model.Location;
         project.CompletionDate = model.CompletionDate;
         project.IsFeatured = model.IsFeatured;
+        project.MetaTitle = string.IsNullOrWhiteSpace(model.MetaTitle) ? model.Title : model.MetaTitle;
+        project.MetaDescription = model.MetaDescription;
+        project.MetaKeywords = model.MetaKeywords;
+        project.Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Title) : model.Slug;
+        project.CanonicalUrl = $"/projects/{project.Slug}";
 
         await _projectService.UpdateAsync(project);
         TempData["SuccessMessage"] = "Project updated successfully.";

@@ -45,6 +45,16 @@ public class CategoryService
     }
 
     /// <summary>
+    /// Retrieves a category by its SEO-friendly slug.
+    /// </summary>
+    /// <param name="slug">The public URL slug.</param>
+    /// <returns>The matching category, or null if no item is found.</returns>
+    public async Task<Category?> GetBySlugAsync(string slug)
+    {
+        return await _categoryRepository.GetBySlugAsync(slug);
+    }
+
+    /// <summary>
     /// Creates a new category and saves it to the database.
     /// Business rules can be expanded here without changing controllers or repositories.
     /// </summary>
@@ -61,6 +71,9 @@ public class CategoryService
         {
             throw new InvalidOperationException("Category name is required.");
         }
+
+        category.Slug = await SeoSlugService.EnsureUniqueSlugAsync(category.Name, async slug => await _categoryRepository.GetBySlugAsync(slug) != null);
+        category.CanonicalUrl = $"/categories/{category.Slug}";
 
         await _categoryRepository.AddAsync(category);
         await _categoryRepository.SaveChangesAsync();
@@ -85,6 +98,9 @@ public class CategoryService
         {
             throw new InvalidOperationException("Category name is required.");
         }
+
+        category.Slug = await SeoSlugService.EnsureUniqueSlugAsync(category.Name, async slug => await _categoryRepository.GetBySlugAsync(slug) != null, category.Slug);
+        category.CanonicalUrl = $"/categories/{category.Slug}";
 
         _categoryRepository.Update(category);
         await _categoryRepository.SaveChangesAsync();

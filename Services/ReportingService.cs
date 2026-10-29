@@ -714,7 +714,6 @@ public class ReportingService
         }
 
         var contentStream = new StringBuilder();
-        var yPosition = 760;
         contentStream.Append("BT\n/F1 18 Tf\n50 760 Td\n(");
         contentStream.Append(EscapePdfText("AISS"));
         contentStream.Append(") Tj\n0 -22 Td\n(");

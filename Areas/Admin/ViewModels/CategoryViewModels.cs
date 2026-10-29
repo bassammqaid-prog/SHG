@@ -65,6 +65,21 @@ public class CategoryCreateViewModel
 
     [Display(Name = "Is Active")]
     public bool IsActive { get; set; } = true;
+
+    [Display(Name = "Meta Title")]
+    [StringLength(160, ErrorMessage = "Meta title cannot exceed 160 characters.")]
+    public string? MetaTitle { get; set; }
+
+    [Display(Name = "Meta Description")]
+    [StringLength(300, ErrorMessage = "Meta description cannot exceed 300 characters.")]
+    public string? MetaDescription { get; set; }
+
+    [Display(Name = "Meta Keywords")]
+    public string? MetaKeywords { get; set; }
+
+    [Display(Name = "Slug")]
+    [RegularExpression("^[a-z0-9]+(?:-[a-z0-9]+)*$", ErrorMessage = "Slug must use lowercase letters, numbers, and hyphens only.")]
+    public string? Slug { get; set; }
 }
 
 /// <summary>
@@ -85,6 +100,21 @@ public class CategoryEditViewModel
 
     [Display(Name = "Is Active")]
     public bool IsActive { get; set; }
+
+    [Display(Name = "Meta Title")]
+    [StringLength(160, ErrorMessage = "Meta title cannot exceed 160 characters.")]
+    public string? MetaTitle { get; set; }
+
+    [Display(Name = "Meta Description")]
+    [StringLength(300, ErrorMessage = "Meta description cannot exceed 300 characters.")]
+    public string? MetaDescription { get; set; }
+
+    [Display(Name = "Meta Keywords")]
+    public string? MetaKeywords { get; set; }
+
+    [Display(Name = "Slug")]
+    [RegularExpression("^[a-z0-9]+(?:-[a-z0-9]+)*$", ErrorMessage = "Slug must use lowercase letters, numbers, and hyphens only.")]
+    public string? Slug { get; set; }
 }
 
 /// <summary>

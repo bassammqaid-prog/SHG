@@ -1,3 +1,4 @@
+using Al_Shami_ِAISS_.Models;
 using Al_Shami_ِAISS_.Services;
 using Al_Shami_ِAISS_.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,11 @@ public class ProductsController : Controller
     /// </summary>
     public async Task<IActionResult> Index(string? searchTerm, int? categoryId, int pageNumber = 1)
     {
+        ViewData["Title"] = "Productos";
+        ViewData["MetaTitle"] = "منتجاتنا | AISS";
+        ViewData["MetaDescription"] = "استكشف منتجاتنا في التوريد والمهندسة والأنظمة الصناعية.";
+        ViewData["MetaKeywords"] = "منتجات, توريد, حلول صناعية, AISS";
+
         var products = await _productService.GetAllAsync();
         var categories = await _categoryService.GetAllAsync();
 
@@ -76,14 +82,45 @@ public class ProductsController : Controller
 
     /// <summary>
     /// Displays the product details page for a selected item.
+    /// The action supports both the legacy ID route and the new SEO-friendly slug route.
     /// </summary>
-    public async Task<IActionResult> Details(int id)
+    [HttpGet("/products/{slug}")]
+    [HttpGet("/Products/Details/{id:int}")]
+    public async Task<IActionResult> Details(int? id, string? slug)
     {
-        var product = await _productService.GetByIdAsync(id);
+        Product? product = null;
+
+        if (!string.IsNullOrWhiteSpace(slug))
+        {
+            product = await _productService.GetBySlugAsync(slug);
+        }
+
+        if (product == null && id.HasValue)
+        {
+            product = await _productService.GetByIdAsync(id.Value);
+        }
+
         if (product == null)
         {
             return NotFound();
         }
+
+        if (string.IsNullOrWhiteSpace(product.Slug))
+        {
+            product.Slug = SeoSlugService.GenerateSlug(product.Name);
+        }
+
+        if (string.IsNullOrWhiteSpace(product.CanonicalUrl))
+        {
+            product.CanonicalUrl = $"/products/{product.Slug}";
+        }
+
+        ViewData["Title"] = product.MetaTitle ?? product.Name;
+        ViewData["MetaTitle"] = product.MetaTitle ?? product.Name;
+        ViewData["MetaDescription"] = product.MetaDescription ?? product.Description;
+        ViewData["MetaKeywords"] = product.MetaKeywords ?? $"{product.Name},{product.Brand},{product.Category?.Name ?? "product"}";
+        ViewData["CanonicalUrl"] = $"{Request.Scheme}://{Request.Host}{product.CanonicalUrl}";
+        ViewData["OgImage"] = product.ImageUrl ?? "/images/default-product.jpg";
 
         var galleryImages = product.ProductImages
             .Select(pi => pi.ImageUrl)

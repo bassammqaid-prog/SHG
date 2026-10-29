@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Al_Shami_ِAISS_.Migrations
 {
     /// <inheritdoc />
-    public partial class reporting : Migration
+    public partial class Reporting : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

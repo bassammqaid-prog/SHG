@@ -1,0 +1,17 @@
+@model Al_Shami_ِAISS_.Models.Category
+
+@{
+    ViewData["Title"] = Model.MetaTitle ?? Model.Name;
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <h1 class="fw-bold mb-3">@Model.Name</h1>
+                <p class="lead text-muted">@Model.Description</p>
+                <a asp-controller="Products" asp-action="Index" class="btn btn-primary">عرض المنتجات</a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -41,6 +41,13 @@ public interface ICategoryRepository
     void Delete(Category category);
 
     /// <summary>
+    /// Retrieves a category using its URL slug for SEO-friendly routing.
+    /// </summary>
+    /// <param name="slug">The SEO-friendly slug to find.</param>
+    /// <returns>The matching category or null.</returns>
+    Task<Category?> GetBySlugAsync(string slug);
+
+    /// <summary>
     /// Saves all pending changes to the database.
     /// </summary>
     /// <returns>The number of state entries written to the database.</returns>

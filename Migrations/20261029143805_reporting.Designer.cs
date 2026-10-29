@@ -13,7 +13,7 @@ namespace Al_Shami_ِAISS_.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20261029143805_reporting")]
-    partial class reporting
+    partial class Reporting
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

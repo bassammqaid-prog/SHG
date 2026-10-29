@@ -56,6 +56,27 @@
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
+                    <div class="col-md-6">
+                        <label asp-for="MetaTitle" class="form-label"></label>
+                        <input asp-for="MetaTitle" class="form-control" />
+                        <span asp-validation-for="MetaTitle" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Slug" class="form-label"></label>
+                        <input asp-for="Slug" class="form-control" />
+                        <span asp-validation-for="Slug" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <label asp-for="MetaDescription" class="form-label"></label>
+                        <textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="MetaDescription" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <label asp-for="MetaKeywords" class="form-label"></label>
+                        <input asp-for="MetaKeywords" class="form-control" />
+                        <span asp-validation-for="MetaKeywords" class="text-danger"></span>
+                    </div>
+
                     <div class="col-12">
                         <div class="form-check form-switch">
                             <input asp-for="IsFeatured" class="form-check-input" />

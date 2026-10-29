@@ -1,0 +1,26 @@
+@{
+    // SEO metadata is kept in one reusable partial so every page can share the same rules.
+    // This keeps titles, descriptions, keywords, and canonical links consistent across the application.
+    var seoTitle = ViewData["SeoTitle"] as string ?? ViewData["MetaTitle"] as string ?? ViewData["Title"] as string ?? "AISS";
+    var seoDescription = ViewData["MetaDescription"] as string ?? "AISS delivers industrial, engineering, and supply solutions for business and infrastructure projects.";
+    var seoKeywords = ViewData["MetaKeywords"] as string ?? "AISS, industrial supply, engineering solutions";
+    var canonicalUrl = ViewData["CanonicalUrl"] as string ?? $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
+    var ogTitle = ViewData["OgTitle"] as string ?? seoTitle;
+    var ogDescription = ViewData["OgDescription"] as string ?? seoDescription;
+    var ogImage = ViewData["OgImage"] as string ?? "/images/default-og.jpg";
+    var ogUrl = ViewData["OgUrl"] as string ?? canonicalUrl;
+}
+
+<title>@seoTitle</title>
+<meta name="description" content="@seoDescription" />
+<meta name="keywords" content="@seoKeywords" />
+<link rel="canonical" href="@canonicalUrl" />
+<meta property="og:title" content="@ogTitle" />
+<meta property="og:description" content="@ogDescription" />
+<meta property="og:image" content="@ogImage" />
+<meta property="og:url" content="@ogUrl" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="@ogTitle" />
+<meta name="twitter:description" content="@ogDescription" />
+<meta name="twitter:image" content="@ogImage" />

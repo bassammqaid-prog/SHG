@@ -39,6 +39,19 @@ public class ProjectRepository : IProjectRepository
     }
 
     /// <inheritdoc />
+    public async Task<Project?> GetBySlugAsync(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+        {
+            return null;
+        }
+
+        return await _context.Projects
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Slug == slug);
+    }
+
+    /// <inheritdoc />
     public async Task AddAsync(Project project)
     {
         await _context.Projects.AddAsync(project);
