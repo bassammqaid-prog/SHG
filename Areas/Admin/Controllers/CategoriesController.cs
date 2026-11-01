@@ -96,7 +96,9 @@ public class CategoriesController : Controller
             MetaDescription = model.MetaDescription,
             MetaKeywords = model.MetaKeywords,
             Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Name) : model.Slug,
-            CanonicalUrl = $"/categories/{SeoSlugService.GenerateSlug(model.Slug ?? model.Name)}",
+            CanonicalUrl = string.IsNullOrWhiteSpace(model.CanonicalUrl)
+                ? $"/categories/{SeoSlugService.GenerateSlug(model.Slug ?? model.Name)}"
+                : model.CanonicalUrl,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -125,7 +127,8 @@ public class CategoriesController : Controller
             MetaTitle = category.MetaTitle,
             MetaDescription = category.MetaDescription,
             MetaKeywords = category.MetaKeywords,
-            Slug = category.Slug
+            Slug = category.Slug,
+            CanonicalUrl = category.CanonicalUrl
         };
 
         return View(viewModel);
@@ -156,7 +159,9 @@ public class CategoriesController : Controller
         category.MetaDescription = model.MetaDescription;
         category.MetaKeywords = model.MetaKeywords;
         category.Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Name) : model.Slug;
-        category.CanonicalUrl = $"/categories/{category.Slug}";
+        category.CanonicalUrl = string.IsNullOrWhiteSpace(model.CanonicalUrl)
+            ? $"/categories/{category.Slug}"
+            : model.CanonicalUrl;
 
         await _categoryService.UpdateAsync(category);
         TempData["SuccessMessage"] = "Category updated successfully.";

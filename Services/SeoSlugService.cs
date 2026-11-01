@@ -1,4 +1,7 @@
 using System.Text;
+using Al_Shami_ِAISS_.Data;
+using Al_Shami_ِAISS_.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Al_Shami_ِAISS_.Services;
 
@@ -78,5 +81,73 @@ public static class SeoSlugService
         }
 
         return candidate;
+    }
+
+    /// <summary>
+    /// Backfills missing SEO values for existing entities so older data still gets readable URLs,
+    /// canonical paths, and metadata without requiring manual editing in the database.
+    /// This is especially important after a deployment where seed data or older records were created
+    /// before the SEO fields existed.
+    /// </summary>
+    /// <param name="context">The application database context holding the catalog records.</param>
+    public static async Task BackfillMissingSeoDataAsync(ApplicationDbContext context)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+
+        var categories = await context.Categories.ToListAsync();
+        foreach (var category in categories)
+        {
+            if (string.IsNullOrWhiteSpace(category.Slug))
+            {
+                category.Slug = await EnsureUniqueSlugAsync(category.Name, async slug => await context.Categories.AnyAsync(c => c.Id != category.Id && c.Slug == slug));
+            }
+
+            if (string.IsNullOrWhiteSpace(category.CanonicalUrl))
+            {
+                category.CanonicalUrl = $"/categories/{category.Slug}";
+            }
+
+            category.MetaTitle ??= category.Name;
+            category.MetaDescription ??= category.Description;
+            category.MetaKeywords ??= category.Name;
+        }
+
+        var products = await context.Products.Include(p => p.Category).ToListAsync();
+        foreach (var product in products)
+        {
+            if (string.IsNullOrWhiteSpace(product.Slug))
+            {
+                product.Slug = await EnsureUniqueSlugAsync(product.Name, async slug => await context.Products.AnyAsync(p => p.Id != product.Id && p.Slug == slug));
+            }
+
+            if (string.IsNullOrWhiteSpace(product.CanonicalUrl))
+            {
+                product.CanonicalUrl = $"/products/{product.Slug}";
+            }
+
+            product.MetaTitle ??= product.Name;
+            product.MetaDescription ??= product.Description;
+            product.MetaKeywords ??= $"{product.Name},{product.Brand},{product.Category?.Name ?? "Product"}";
+        }
+
+        var projects = await context.Projects.ToListAsync();
+        foreach (var project in projects)
+        {
+            if (string.IsNullOrWhiteSpace(project.Slug))
+            {
+                project.Slug = await EnsureUniqueSlugAsync(project.Title, async slug => await context.Projects.AnyAsync(p => p.Id != project.Id && p.Slug == slug));
+            }
+
+            if (string.IsNullOrWhiteSpace(project.CanonicalUrl))
+            {
+                project.CanonicalUrl = $"/projects/{project.Slug}";
+            }
+
+            project.MetaTitle ??= project.Title;
+            project.MetaDescription ??= project.Description;
+            project.MetaKeywords ??= $"{project.Title},{project.ClientName},{project.Location}";
+        }
+
+        await context.SaveChangesAsync();
     }
 }

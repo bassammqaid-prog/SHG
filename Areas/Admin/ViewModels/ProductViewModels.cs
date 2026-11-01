@@ -137,6 +137,11 @@ public class ProductCreateViewModel
     [RegularExpression("^[a-z0-9]+(?:-[a-z0-9]+)*$", ErrorMessage = "Slug must use lowercase letters, numbers, and hyphens only.")]
     public string? Slug { get; set; }
 
+    [Display(Name = "Canonical URL")]
+    [RegularExpression("^/?[a-zA-Z0-9/_-]+$", ErrorMessage = "Canonical URL must use a relative path such as /products/steel-door.")]
+    [StringLength(500, ErrorMessage = "Canonical URL cannot exceed 500 characters.")]
+    public string? CanonicalUrl { get; set; }
+
     public List<SelectListItem> CategoryOptions { get; set; } = new();
 }
 
@@ -197,6 +202,11 @@ public class ProductEditViewModel
     [Display(Name = "Slug")]
     [RegularExpression("^[a-z0-9]+(?:-[a-z0-9]+)*$", ErrorMessage = "Slug must use lowercase letters, numbers, and hyphens only.")]
     public string? Slug { get; set; }
+
+    [Display(Name = "Canonical URL")]
+    [RegularExpression("^/?[a-zA-Z0-9/_-]+$", ErrorMessage = "Canonical URL must use a relative path such as /products/steel-door.")]
+    [StringLength(500, ErrorMessage = "Canonical URL cannot exceed 500 characters.")]
+    public string? CanonicalUrl { get; set; }
 
     public List<SelectListItem> CategoryOptions { get; set; } = new();
 }

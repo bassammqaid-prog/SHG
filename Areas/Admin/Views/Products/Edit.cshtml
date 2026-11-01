@@ -81,6 +81,11 @@
                         <span asp-validation-for="Slug" class="text-danger"></span>
                     </div>
                     <div class="col-12">
+                        <label asp-for="CanonicalUrl" class="form-label"></label>
+                        <input asp-for="CanonicalUrl" class="form-control" />
+                        <span asp-validation-for="CanonicalUrl" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
                         <label asp-for="MetaDescription" class="form-label"></label>
                         <textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="MetaDescription" class="text-danger"></span>

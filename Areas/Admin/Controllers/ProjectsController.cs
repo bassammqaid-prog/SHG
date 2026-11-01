@@ -102,7 +102,9 @@ public class ProjectsController : Controller
             MetaDescription = model.MetaDescription,
             MetaKeywords = model.MetaKeywords,
             Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Title) : model.Slug,
-            CanonicalUrl = $"/projects/{SeoSlugService.GenerateSlug(model.Slug ?? model.Title)}"
+            CanonicalUrl = string.IsNullOrWhiteSpace(model.CanonicalUrl)
+                ? $"/projects/{SeoSlugService.GenerateSlug(model.Slug ?? model.Title)}"
+                : model.CanonicalUrl
         };
 
         await _projectService.AddAsync(project);
@@ -134,7 +136,8 @@ public class ProjectsController : Controller
             MetaTitle = project.MetaTitle,
             MetaDescription = project.MetaDescription,
             MetaKeywords = project.MetaKeywords,
-            Slug = project.Slug
+            Slug = project.Slug,
+            CanonicalUrl = project.CanonicalUrl
         };
 
         return View(viewModel);
@@ -169,7 +172,9 @@ public class ProjectsController : Controller
         project.MetaDescription = model.MetaDescription;
         project.MetaKeywords = model.MetaKeywords;
         project.Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Title) : model.Slug;
-        project.CanonicalUrl = $"/projects/{project.Slug}";
+        project.CanonicalUrl = string.IsNullOrWhiteSpace(model.CanonicalUrl)
+            ? $"/projects/{project.Slug}"
+            : model.CanonicalUrl;
 
         await _projectService.UpdateAsync(project);
         TempData["SuccessMessage"] = "Project updated successfully.";

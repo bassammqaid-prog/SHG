@@ -123,7 +123,9 @@ public class ProductsController : Controller
             MetaDescription = model.MetaDescription,
             MetaKeywords = model.MetaKeywords,
             Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Name) : model.Slug,
-            CanonicalUrl = $"/products/{SeoSlugService.GenerateSlug(model.Slug ?? model.Name)}",
+            CanonicalUrl = string.IsNullOrWhiteSpace(model.CanonicalUrl)
+                ? $"/products/{SeoSlugService.GenerateSlug(model.Slug ?? model.Name)}"
+                : model.CanonicalUrl,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -159,6 +161,7 @@ public class ProductsController : Controller
             MetaDescription = product.MetaDescription,
             MetaKeywords = product.MetaKeywords,
             Slug = product.Slug,
+            CanonicalUrl = product.CanonicalUrl,
             CategoryOptions = await GetCategorySelectListAsync()
         };
 
@@ -198,7 +201,9 @@ public class ProductsController : Controller
         product.MetaDescription = model.MetaDescription;
         product.MetaKeywords = model.MetaKeywords;
         product.Slug = string.IsNullOrWhiteSpace(model.Slug) ? SeoSlugService.GenerateSlug(model.Name) : model.Slug;
-        product.CanonicalUrl = $"/products/{product.Slug}";
+        product.CanonicalUrl = string.IsNullOrWhiteSpace(model.CanonicalUrl)
+            ? $"/products/{product.Slug}"
+            : model.CanonicalUrl;
 
         await _productService.UpdateAsync(product);
         TempData["SuccessMessage"] = "Product updated successfully.";
