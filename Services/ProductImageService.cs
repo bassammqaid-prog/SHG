@@ -81,15 +81,9 @@ public class ProductImageService
             ValidateImageFile(imageFile);
         }
 
-        if (!string.IsNullOrWhiteSpace(imageUrl))
+        if (!string.IsNullOrWhiteSpace(imageUrl) && !IsAllowedImageSource(imageUrl))
         {
-            var trimmedUrl = imageUrl.Trim();
-            if (!trimmedUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase)
-                && !trimmedUrl.StartsWith("/", StringComparison.Ordinal)
-                && !trimmedUrl.StartsWith("~", StringComparison.Ordinal))
-            {
-                throw new InvalidOperationException("Please provide a valid image URL.");
-            }
+            throw new InvalidOperationException("Please provide a valid image URL.");
         }
 
         var storedImageUrl = await ResolveImageUrlAsync(imageFile, imageUrl, hostingEnvironment);
@@ -119,14 +113,13 @@ public class ProductImageService
             throw new KeyNotFoundException($"Product image with id {id} was not found.");
         }
 
-        if (!string.IsNullOrWhiteSpace(productImage.ImageUrl)
-            && !productImage.ImageUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+        if (TryNormalizeLocalRelativePath(productImage.ImageUrl, out var relativePath))
         {
-            var relativePath = productImage.ImageUrl.TrimStart('~', '/');
-            var filePath = Path.Combine(hostingEnvironment.WebRootPath, relativePath.Replace('/', Path.DirectorySeparatorChar));
-            if (File.Exists(filePath))
+            var fullPath = Path.GetFullPath(Path.Combine(hostingEnvironment.WebRootPath, relativePath));
+            var webRootPath = Path.GetFullPath(hostingEnvironment.WebRootPath);
+            if (fullPath.StartsWith(webRootPath, StringComparison.OrdinalIgnoreCase) && File.Exists(fullPath))
             {
-                File.Delete(filePath);
+                File.Delete(fullPath);
             }
         }
 
@@ -134,6 +127,10 @@ public class ProductImageService
         await _productImageRepository.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Validates the uploaded file before it is accepted into the application.
+    /// </summary>
+    /// <param name="imageFile">The uploaded file to inspect.</param>
     private static void ValidateImageFile(IFormFile imageFile)
     {
         if (imageFile.Length == 0)
@@ -151,6 +148,66 @@ public class ProductImageService
         {
             throw new InvalidOperationException("Only JPG, JPEG, PNG, and WEBP image files are allowed.");
         }
+    }
+
+    /// <summary>
+    /// Ensures an image source is either a safe web URL or a relative application path.
+    /// This prevents malicious schemes or traversal paths from being stored as image URLs.
+    /// </summary>
+    /// <param name="imageUrl">The proposed image URL.</param>
+    /// <returns><c>true</c> when the image source is safe; otherwise <c>false</c>.</returns>
+    private static bool IsAllowedImageSource(string imageUrl)
+    {
+        if (string.IsNullOrWhiteSpace(imageUrl))
+        {
+            return false;
+        }
+
+        var trimmedUrl = imageUrl.Trim();
+        if (trimmedUrl.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+            || trimmedUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+        {
+            return Uri.TryCreate(trimmedUrl, UriKind.Absolute, out var uri)
+                && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+        }
+
+        if (trimmedUrl.StartsWith("/", StringComparison.Ordinal) || trimmedUrl.StartsWith("~/", StringComparison.Ordinal))
+        {
+            return !trimmedUrl.Contains("..", StringComparison.Ordinal)
+                && !trimmedUrl.Contains('\\');
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Converts a relative image path into a safe local path for server-side file handling.
+    /// </summary>
+    /// <param name="imageUrl">The stored image URL.</param>
+    /// <param name="relativePath">The normalized local path if the source is local.</param>
+    /// <returns><c>true</c> if the value is a safe local path; otherwise <c>false</c>.</returns>
+    private static bool TryNormalizeLocalRelativePath(string? imageUrl, out string relativePath)
+    {
+        relativePath = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(imageUrl) || imageUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        var sanitized = imageUrl.Trim().TrimStart('~');
+        if (sanitized.StartsWith('/'))
+        {
+            sanitized = sanitized.TrimStart('/');
+        }
+
+        if (sanitized.Contains("..", StringComparison.Ordinal) || sanitized.Contains('\\'))
+        {
+            return false;
+        }
+
+        relativePath = sanitized.Replace('/', Path.DirectorySeparatorChar);
+        return !string.IsNullOrWhiteSpace(relativePath);
     }
 
     private static async Task<string> ResolveImageUrlAsync(IFormFile? imageFile, string? imageUrl, IWebHostEnvironment hostingEnvironment)
