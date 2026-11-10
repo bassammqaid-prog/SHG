@@ -1,9 +1,9 @@
 using System.Net;
 using System.Net.Mail;
-using Al_Shami_ِAISS_.Models;
+using Al_Shami_AISS_.Models;
 using Microsoft.Extensions.Options;
 
-namespace Al_Shami_ِAISS_.Services;
+namespace Al_Shami_AISS_.Services;
 
 /// <summary>
 /// Sends transactional email messages through SMTP.

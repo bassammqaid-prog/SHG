@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Al_Shami_ِAISS_.Areas.Admin.ViewModels;
+namespace Al_Shami_AISS_.Areas.Admin.ViewModels;
 
 /// <summary>
 /// Displays a quote request in the admin list table.

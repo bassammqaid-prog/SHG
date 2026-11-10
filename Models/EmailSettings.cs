@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.Models;
+namespace Al_Shami_AISS_.Models;
 
 /// <summary>
 /// Holds the SMTP configuration used by the application email service.

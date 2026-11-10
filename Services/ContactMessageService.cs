@@ -1,7 +1,7 @@
-using Al_Shami_ِAISS_.Models;
-using Al_Shami_ِAISS_.Repositories.Interfaces;
+using Al_Shami_AISS_.Models;
+using Al_Shami_AISS_.Repositories.Interfaces;
 
-namespace Al_Shami_ِAISS_.Services;
+namespace Al_Shami_AISS_.Services;
 
 /// <summary>
 /// Business service for managing inbound contact messages.

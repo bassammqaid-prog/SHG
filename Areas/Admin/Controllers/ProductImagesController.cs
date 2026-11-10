@@ -1,10 +1,10 @@
-using Al_Shami_ِAISS_.Areas.Admin.ViewModels;
-using Al_Shami_ِAISS_.Services;
+using Al_Shami_AISS_.Areas.Admin.ViewModels;
+using Al_Shami_AISS_.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
+namespace Al_Shami_AISS_.Areas.Admin.Controllers;
 
 /// <summary>
 /// Handles product image management inside the Admin area.

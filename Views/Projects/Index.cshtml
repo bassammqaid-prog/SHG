@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.ViewModels.ProjectListViewModel
+@model Al_Shami_AISS_.ViewModels.ProjectListViewModel
 
 @{
     ViewData["Title"] = "Projects";
@@ -7,8 +7,8 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h1 class="fw-bold">Projects</h1>
-            <p class="text-muted">A look at the solutions and facilities delivered by AISS.</p>
+            <h1 class="fw-bold">مشاريعنا</h1>
+            <p class="text-muted">نظرة على الحلول والمرافق التي قدمتها S H G.</p>
         </div>
 
         <div class="row g-4">
@@ -24,7 +24,7 @@
                             <h3 class="h5">@project.Title</h3>
                             <p class="text-muted mb-2">@project.ClientName</p>
                             <p class="mb-3">@project.Location</p>
-                            <a asp-action="Details" asp-route-id="@project.Id" class="btn btn-outline-primary">View Details</a>
+                            <a asp-action="Details" asp-route-id="@project.Id" class="btn btn-outline-primary">رؤوية التفاصيل</a>
                         </div>
                     </div>
                 </div>

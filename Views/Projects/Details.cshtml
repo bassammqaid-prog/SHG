@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.ViewModels.ProjectDetailsViewModel
+@model Al_Shami_AISS_.ViewModels.ProjectDetailsViewModel
 
 @{
     ViewData["Title"] = Model.Title;
@@ -29,14 +29,14 @@
 
                 <p class="lead">@Model.Description</p>
 
-                <a asp-controller="Projects" asp-action="Index" class="btn btn-outline-secondary">Back to Projects</a>
+                <a asp-controller="Projects" asp-action="Index" class="btn btn-outline-secondary">العودة إلى قائمة المشاريع</a>
             </div>
         </div>
 
         @if (Model.GalleryImages.Any())
         {
             <div class="mt-5">
-                <h3 class="fw-bold mb-4">Project Gallery</h3>
+                <h3 class="fw-bold mb-4">معرض المشروع</h3>
                 <div class="row g-4">
                     @foreach (var imageUrl in Model.GalleryImages)
                     {

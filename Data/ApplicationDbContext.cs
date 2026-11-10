@@ -1,8 +1,8 @@
-using Al_Shami_ِAISS_.Models;
+using Al_Shami_AISS_.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Al_Shami_ِAISS_.Data;
+namespace Al_Shami_AISS_.Data;
 
 /// <summary>
 /// The main EF Core database context for the application.

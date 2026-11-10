@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.ViewModels;
+namespace Al_Shami_AISS_.ViewModels;
 
 /// <summary>
 /// Represents the data displayed on the public home page.
@@ -10,12 +10,12 @@ public class HomeViewModel
     /// <summary>
     /// Short company introduction shown in the hero area and overview section.
     /// </summary>
-    public string CompanyIntroduction { get; set; } = "Al-Shami Integrated Solutions & Supply (AISS) delivers trusted industrial, safety, and energy solutions across the region.";
+    public string CompanyIntroduction { get; set; } = "تُقدم شركة الشامي للحلول المتكاملة والتوريدات (S H G) حلولاً موثوقة في المجالات الصناعية والسلامة والطاقة في جميع أنحاء المنطقة..";
 
     /// <summary>
     /// Mission statement for the public about section.
     /// </summary>
-    public string MissionStatement { get; set; } = "To provide safe, reliable, and innovative solutions that support the growth and operational excellence of our clients.";
+    public string MissionStatement { get; set; } = "التزامنا هو توفير حلول مبتكرة وآمنة وموثوقة، تسهم في تعزيز نمو عملائنا وتحقيق تميزهم التشغيلي.";
 
     /// <summary>
     /// Collection of categories highlighted on the home page.
@@ -38,7 +38,7 @@ public class HomeViewModel
     public List<string> Services { get; set; } = new();
 
     /// <summary>
-    /// Reasons customers choose AISS.
+    /// Reasons customers choose S H G.
     /// </summary>
     public List<string> WhyChooseUs { get; set; } = new();
 }

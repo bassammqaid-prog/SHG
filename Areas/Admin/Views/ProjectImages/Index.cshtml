@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProjectImageListViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProjectImageListViewModel
 
 @{
     ViewData["Title"] = "Project Gallery";
@@ -7,12 +7,12 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center flex-wrap mb-4 gap-3">
         <div>
-            <h1 class="h3 mb-1">Project Gallery</h1>
-            <p class="text-muted mb-0">Manage gallery images for @Model.ProjectTitle.</p>
+            <h1 class="h3 mb-1">معرض صور المشاريع</h1>
+            <p class="text-muted mb-0">إدارة صور المعرض للمشروع @Model.ProjectTitle.</p>
         </div>
         <div>
-            <a asp-area="Admin" asp-controller="Projects" asp-action="Details" asp-route-id="@Model.ProjectId" class="btn btn-outline-secondary me-2">Back to Project</a>
-            <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Create" asp-route-projectId="@Model.ProjectId" class="btn btn-primary">Add Image</a>
+            <a asp-area="Admin" asp-controller="Projects" asp-action="Details" asp-route-id="@Model.ProjectId" class="btn btn-outline-secondary me-2">العودة إلى المشروع</a>
+            <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Create" asp-route-projectId="@Model.ProjectId" class="btn btn-primary">إضافة صورة</a>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
                     <div class="card shadow-sm border-0 h-100">
                         <img src="@image.ImageUrl" class="card-img-top" alt="Project gallery image" style="height: 220px; object-fit: cover;" />
                         <div class="card-body text-center">
-                            <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Delete" asp-route-id="@image.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                            <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Delete" asp-route-id="@image.Id" class="btn btn-outline-danger btn-sm">حذف</a>
                         </div>
                     </div>
                 </div>
@@ -39,6 +39,6 @@
     }
     else
     {
-        <div class="alert alert-info">No images have been uploaded for this project yet.</div>
+        <div class="alert alert-info">لا توجد صور مرفقة لهذا المشروع بعد.</div>
     }
 </div>

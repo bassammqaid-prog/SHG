@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Al_Shami_ِAISS_.ViewModels;
+namespace Al_Shami_AISS_.ViewModels;
 
 /// <summary>
 /// Represents the public quote request form.

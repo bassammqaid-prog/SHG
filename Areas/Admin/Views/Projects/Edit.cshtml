@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProjectEditViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProjectEditViewModel
 
 @{
     ViewData["Title"] = "Edit Project";
@@ -7,10 +7,10 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Edit Project</h1>
-            <p class="text-muted mb-0">Update project details.</p>
+            <h1 class="h3 mb-1">تعديل المشروع</h1>
+            <p class="text-muted mb-0">تحديث تفاصيل المشروع</p>
         </div>
-        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">العودة إلى القائمة</a>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -21,63 +21,63 @@
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label asp-for="Title" class="form-label"></label>
+                        <label asp-for="Title" class="form-label">العنوان</label>
                         <input asp-for="Title" class="form-control" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="ClientName" class="form-label"></label>
+                        <label asp-for="ClientName" class="form-label">اسم العميل</label>
                         <input asp-for="ClientName" class="form-control" />
                         <span asp-validation-for="ClientName" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="Location" class="form-label"></label>
+                        <label asp-for="Location" class="form-label">الموقع</label>
                         <input asp-for="Location" class="form-control" />
                         <span asp-validation-for="Location" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="CompletionDate" class="form-label"></label>
+                        <label asp-for="CompletionDate" class="form-label">تاريخ الإكمال</label>
                         <input asp-for="CompletionDate" type="date" class="form-control" />
                         <span asp-validation-for="CompletionDate" class="text-danger"></span>
                     </div>
 
                     <div class="col-12">
-                        <label asp-for="ImageUrl" class="form-label"></label>
+                        <label asp-for="ImageUrl" class="form-label">رابط الصورة</label>
                         <input asp-for="ImageUrl" class="form-control" />
                         <span asp-validation-for="ImageUrl" class="text-danger"></span>
                     </div>
 
                     <div class="col-12">
-                        <label asp-for="Description" class="form-label"></label>
+                        <label asp-for="Description" class="form-label">الوصف</label>
                         <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="MetaTitle" class="form-label"></label>
+                        <label asp-for="MetaTitle" class="form-label"> عنوان المشروع  </label>
                         <input asp-for="MetaTitle" class="form-control" />
                         <span asp-validation-for="MetaTitle" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="Slug" class="form-label"></label>
+                        <label asp-for="Slug" class="form-label">الرابط المختصر</label>
                         <input asp-for="Slug" class="form-control" />
                         <span asp-validation-for="Slug" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="CanonicalUrl" class="form-label"></label>
+                        <label asp-for="CanonicalUrl" class="form-label">الرابطcanonical</label>
                         <input asp-for="CanonicalUrl" class="form-control" />
                         <span asp-validation-for="CanonicalUrl" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="MetaDescription" class="form-label"></label>
+                        <label asp-for="MetaDescription" class="form-label">وصف المشروع</label>
                         <textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="MetaDescription" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="MetaKeywords" class="form-label"></label>
+                        <label asp-for="MetaKeywords" class="form-label">الكلمات المفتاحية للمشروع</label>
                         <input asp-for="MetaKeywords" class="form-control" />
                         <span asp-validation-for="MetaKeywords" class="text-danger"></span>
                     </div>
@@ -85,7 +85,7 @@
                     <div class="col-12">
                         <div class="form-check form-switch">
                             <input asp-for="IsFeatured" class="form-check-input" />
-                            <label asp-for="IsFeatured" class="form-check-label"></label>
+                            <label asp-for="IsFeatured" class="form-check-label">مميز</label>
                         </div>
                     </div>
                 </div>

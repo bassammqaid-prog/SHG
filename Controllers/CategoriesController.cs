@@ -1,8 +1,8 @@
-using Al_Shami_ِAISS_.Models;
-using Al_Shami_ِAISS_.Services;
+using Al_Shami_AISS_.Models;
+using Al_Shami_AISS_.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Al_Shami_ِAISS_.Controllers;
+namespace Al_Shami_AISS_.Controllers;
 
 /// <summary>
 /// Public controller for category pages.

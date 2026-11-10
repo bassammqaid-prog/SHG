@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Al_Shami_ِAISS_.Models;
+namespace Al_Shami_AISS_.Models;
 
 /// <summary>
 /// Represents the authenticated application user.

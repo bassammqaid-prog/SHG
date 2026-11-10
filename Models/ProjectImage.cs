@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.Models;
+namespace Al_Shami_AISS_.Models;
 
 /// <summary>
 /// Represents an additional image associated with a project gallery.

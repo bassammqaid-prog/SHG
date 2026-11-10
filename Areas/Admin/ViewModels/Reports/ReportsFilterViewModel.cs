@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.Areas.Admin.ViewModels.Reports;
+namespace Al_Shami_AISS_.Areas.Admin.ViewModels.Reports;
 
 /// <summary>
 /// Represents the filter criteria shared across report summaries and export actions.

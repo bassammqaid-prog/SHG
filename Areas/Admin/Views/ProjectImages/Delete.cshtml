@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProjectImageDeleteViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProjectImageDeleteViewModel
 
 @{
     ViewData["Title"] = "Delete Project Image";
@@ -7,8 +7,8 @@
 <div class="container py-4">
     <div class="card shadow-sm border-0 mx-auto" style="max-width: 700px;">
         <div class="card-body p-4">
-            <h1 class="h3 mb-3">Delete Project Image</h1>
-            <p class="text-muted mb-4">Are you sure you want to remove this gallery image from @Model.ProjectTitle?</p>
+            <h1 class="h3 mb-3">حذف صورة المشروع</h1>
+            <p class="text-muted mb-4">هل أنت متأكد أنك تريد إزالة هذه الصورة من معرض المشروع @Model.ProjectTitle؟</p>
 
             <div class="mb-4 text-center">
                 <img src="@Model.ImageUrl" alt="Project image to delete" class="img-fluid rounded border" style="max-height: 260px; object-fit: cover;" />
@@ -17,8 +17,8 @@
             <form asp-area="Admin" asp-controller="ProjectImages" asp-action="Delete" asp-route-id="@Model.Id" method="post">
                 @Html.AntiForgeryToken()
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                    <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.ProjectId" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                    <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.ProjectId" class="btn btn-outline-secondary">إلغاء</a>
                 </div>
             </form>
         </div>

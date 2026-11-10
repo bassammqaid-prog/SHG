@@ -1,5 +1,5 @@
 @using System.Globalization
-@using Al_Shami_ِAISS_.Resources
+@using Al_Shami_AISS_.Resources
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Localization
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
@@ -16,14 +16,6 @@
         Context.Request.Path +
         Context.Request.QueryString;
 }
-
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -44,84 +36,96 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">AISS</a>
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">S H G</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                        @* فحص ما إذا كان المستخدم في الواجهة العامة (خارج أي Area) *@
+                        @if (ViewContext.RouteData.Values["area"] == null || string.IsNullOrEmpty(ViewContext.RouteData.Values["area"]?.ToString()))
+                        {
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">@Localizer["الرئيسية"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")" asp-controller="Home" asp-action="About">@Localizer["About"]</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")" asp-controller="Home" asp-action="About">@Localizer["حول الشركة"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")" asp-controller="Products" asp-action="Index">@Localizer["Products"]</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")" asp-controller="Products" asp-action="Index">@Localizer["المنتجات"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Projects" ? "active" : "")" asp-controller="Projects" asp-action="Index">@Localizer["Projects"]</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Projects" ? "active" : "")" asp-controller="Projects" asp-action="Index">@Localizer["المشاريع"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")" asp-controller="Contact" asp-action="Index">@Localizer["Contact"]</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")" asp-controller="Contact" asp-action="Index">@Localizer["اتصل بنا"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Quote" ? "active" : "")" asp-controller="Quote" asp-action="Index">@Localizer["RequestQuote"]</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Quote" ? "active" : "")" asp-controller="Quote" asp-action="Index">@Localizer["طلب عرض سعر"]</a>
                         </li>
-
+                        }
                         @if (User.Identity is not null && User.Identity.IsAuthenticated)
                         {
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">@Localizer["Dashboard"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">@Localizer["لوحة التحكم"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">@Localizer["Categories"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">@Localizer["الفئات"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">@Localizer["Products"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">@Localizer["المنتجات"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Projects" asp-action="Index">@Localizer["Projects"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Projects" asp-action="Index">@Localizer["المشاريع"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="ContactMessages" asp-action="Index">@Localizer["Messages"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="ContactMessages" asp-action="Index">@Localizer["الرسائل"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="QuoteRequests" asp-action="Index">@Localizer["Quotes"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="QuoteRequests" asp-action="Index">@Localizer["عروض الأسعار"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="ActivityLogs" asp-action="Index">@Localizer["ActivityLogs"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="ActivityLogs" asp-action="Index">@Localizer["سجلات النشاط "]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Reports" asp-action="Index">@Localizer["التقارير"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="ProductImages" asp-action="Index">@Localizer["صور المنتجات"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="ProjectImages" asp-action="Index">@Localizer["صور المشاريع"]</a>
                                 </li>
                             }
                             else if (User.IsInRole("Manager"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">@Localizer["Dashboard"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">@Localizer["لوحة التحكم"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">@Localizer["Products"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">@Localizer["المنتجات"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Projects" asp-action="Index">@Localizer["Projects"]</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Projects" asp-action="Index">@Localizer["المشاريع"]</a>
                                 </li>
                             }
 
                             <li class="nav-item ms-lg-3">
-                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                <form asp-area="Account" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-outline-light btn-sm">@Localizer["Logout"]</button>
+                                    <button type="submit" class="btn btn-outline-light btn-sm">@Localizer["تسجيل الخروج"]</button>
                                 </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item ms-lg-3">
-                                <a class="btn btn-outline-light btn-sm" asp-controller="Account" asp-action="Login">@Localizer["Login"]</a>
+                                <a class="btn btn-outline-light btn-sm"asp-area="" asp-controller="Account" asp-action="Login">@Localizer["تسجيل الدخول"]</a>
                             </li>
                         }
-
+                        
                         <li class="nav-item ms-lg-3 dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@currentCulture.NativeName</a>
                             <ul class="dropdown-menu">
@@ -146,23 +150,23 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <h5 class="fw-bold">AISS</h5>
-                    <p class="text-secondary">@Localizer["CompanyIntro"]</p>
+                    <h5 class="fw-bold">S H G</h5>
+                    <p class="text-secondary">@Localizer["مقدمة الشركة"]</p>
                 </div>
                 <div class="col-md-4">
-                    <h5 class="fw-bold">@Localizer["QuickLinks"]</h5>
+                    <h5 class="fw-bold">@Localizer["روابط سريعة"]</h5>
                     <ul class="list-unstyled">
-                        <li><a class="text-secondary text-decoration-none" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
-                        <li><a class="text-secondary text-decoration-none" asp-controller="Home" asp-action="About">@Localizer["About"]</a></li>
-                        <li><a class="text-secondary text-decoration-none" asp-controller="Products" asp-action="Index">@Localizer["Products"]</a></li>
-                        <li><a class="text-secondary text-decoration-none" asp-controller="Projects" asp-action="Index">@Localizer["Projects"]</a></li>
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Home" asp-action="Index">@Localizer["الرئيسية"]</a></li>
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Home" asp-action="About">@Localizer["حول موقعنا"]</a></li>
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Products" asp-action="Index">@Localizer["المنتجات"]</a></li>
+                        <li><a class="text-secondary text-decoration-none" asp-controller="Projects" asp-action="Index">@Localizer["المشاريع"]</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h5 class="fw-bold">@Localizer["Contact"]</h5>
-                    <p class="text-secondary mb-1">Email: info@aiss.com</p>
-                    <p class="text-secondary mb-1">Phone: +966 12 345 6789</p>
-                    <p class="text-secondary mb-0">Location: Riyadh, Saudi Arabia</p>
+                    <h5 class="fw-bold">@Localizer["للتواصل"]</h5>
+                    <p class="text-secondary mb-1">Email: info@shg.com</p>
+                    <p class="text-secondary mb-1">Phone: +966 773297111</p>
+                    <p class="text-secondary mb-0">Location: Sana'a, Yemen</p>
                 </div>
             </div>
             <div class="border-top border-secondary mt-4 pt-3 text-secondary small">

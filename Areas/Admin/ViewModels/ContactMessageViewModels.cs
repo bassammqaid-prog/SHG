@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Al_Shami_ِAISS_.Areas.Admin.ViewModels;
+namespace Al_Shami_AISS_.Areas.Admin.ViewModels;
 
 /// <summary>
 /// Displays a contact message in a table list.

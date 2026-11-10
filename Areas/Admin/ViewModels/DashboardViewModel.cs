@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.Areas.Admin.ViewModels;
+namespace Al_Shami_AISS_.Areas.Admin.ViewModels;
 
 /// <summary>
 /// Represents the summary data displayed on the admin dashboard.

@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.ViewModels.ProductDetailsViewModel
+@model Al_Shami_AISS_.ViewModels.ProductDetailsViewModel
 
 @{
     ViewData["Title"] = Model.Name;
@@ -15,7 +15,7 @@
                 else
                 {
                     <div class="bg-light rounded shadow-sm d-flex align-items-center justify-content-center" style="height: 420px;">
-                        <span class="text-muted">No product image available</span>
+                        <span class="text-muted">لا توجد صورة للمنتج متاحة</span>
                     </div>
                 }
 
@@ -44,15 +44,15 @@
                     <dt class="col-sm-4">Model</dt>
                     <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.ModelNumber) ? "-" : Model.ModelNumber)</dd>
 
-                    <dt class="col-sm-4">Stock</dt>
+                    <dt class="col-sm-4">الكمية في المخزون</dt>
                     <dd class="col-sm-8">@Model.StockQuantity</dd>
                 </dl>
 
                 <p class="text-muted">@Model.Description</p>
 
                 <div class="d-flex gap-3 flex-wrap mt-4">
-                    <a asp-controller="Quote" asp-action="Index" class="btn btn-primary">Request Quote</a>
-                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-secondary">Back to Products</a>
+                    <a asp-controller="Quote" asp-action="Index" class="btn btn-primary">طلب عرض سعر</a>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-secondary">العودة إلى المنتجات</a>
                 </div>
             </div>
         </div>

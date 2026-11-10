@@ -1,10 +1,10 @@
 using System.Globalization;
-using Al_Shami_ِAISS_.Data;
-using Al_Shami_ِAISS_.Models;
-using Al_Shami_ِAISS_.Repositories.Implementations;
-using Al_Shami_ِAISS_.Repositories.Interfaces;
-using Al_Shami_ِAISS_.Resources;
-using Al_Shami_ِAISS_.Services;
+using Al_Shami_AISS_.Data;
+using Al_Shami_AISS_.Models;
+using Al_Shami_AISS_.Repositories.Implementations;
+using Al_Shami_AISS_.Repositories.Interfaces;
+using Al_Shami_AISS_.Resources;
+using Al_Shami_AISS_.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;

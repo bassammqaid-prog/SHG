@@ -1,9 +1,9 @@
-using Al_Shami_ِAISS_.Areas.Admin.ViewModels.Reports;
-using Al_Shami_ِAISS_.Services;
+using Al_Shami_AISS_.Areas.Admin.ViewModels.Reports;
+using Al_Shami_AISS_.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Al_Shami_ِAISS_.Areas.Admin.Controllers;
+namespace Al_Shami_AISS_.Areas.Admin.Controllers;
 
 /// <summary>
 /// Provides the reporting and export dashboard for administrators and managers.

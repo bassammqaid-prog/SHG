@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProjectDetailsViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProjectDetailsViewModel
 
 @{
     ViewData["Title"] = "Project Details";
@@ -7,13 +7,13 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Project Details</h1>
-            <p class="text-muted mb-0">Review the selected project.</p>
+            <h1 class="h3 mb-1">تفاصيل المشروع</h1>
+            <p class="text-muted mb-0">مراجعة المشروع المحدد.</p>
         </div>
         <div>
-            <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.Id" class="btn btn-outline-primary me-2">Manage Gallery</a>
+            <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.Id" class="btn btn-outline-primary me-2">إدارة المعرض</a>
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">Edit</a>
-            <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            <a asp-action="Index" class="btn btn-outline-secondary">العودة إلى القائمة</a>
         </div>
     </div>
 

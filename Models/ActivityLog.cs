@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.Models;
+namespace Al_Shami_AISS_.Models;
 
 /// <summary>
 /// Represents a business activity event recorded by the application.

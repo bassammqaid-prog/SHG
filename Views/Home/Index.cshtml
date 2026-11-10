@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model Al_Shami_ِAISS_.ViewModels.HomeViewModel
+@model Al_Shami_AISS_.ViewModels.HomeViewModel
 
 @{
     ViewData["Title"] = "Home";
@@ -15,18 +15,18 @@
     <div class="container py-5">
         <div class="row align-items-center g-4">
             <div class="col-lg-7">
-                <span class="badge bg-warning text-dark mb-3">Trusted Industrial Solutions</span>
-                <h1 class="display-4 fw-bold">Powering Progress with Reliable Industrial Solutions</h1>
+                <span class="badge bg-warning text-dark mb-3">حلول صناعية موثوقة</span>
+                <h1 class="display-4 fw-bold">تعزيز التقدم بحلول صناعية موثوقة</h1>
                 <p class="lead text-light-emphasis">@Model.CompanyIntroduction</p>
                 <div class="d-flex gap-3 flex-wrap mt-4">
-                    <a asp-controller="Products" asp-action="Index" class="btn btn-warning btn-lg">Explore Products</a>
-                    <a asp-controller="Quote" asp-action="Index" class="btn btn-outline-light btn-lg">Request a Quote</a>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-warning btn-lg">اكتشف المنتجات</a>
+                    <a asp-controller="Quote" asp-action="Index" class="btn btn-outline-light btn-lg">طلب عرض سعر</a>
                 </div>
             </div>
             <div class="col-lg-5">
                 <div class="card border-0 shadow-lg">
                     <div class="card-body p-4">
-                        <h3 class="h5 text-uppercase text-primary">Mission</h3>
+                        <h3 class="h5 text-uppercase text-primary">المهمة</h3>
                         <p class="mb-0">@Model.MissionStatement</p>
                     </div>
                 </div>
@@ -38,8 +38,8 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">Our Core Categories</h2>
-            <p class="text-muted">Solutions designed for safety, efficiency, and long-term performance.</p>
+            <h2 class="fw-bold">القطاعات الأساسية لدينا</h2>
+            <p class="text-muted">حلول مصممة للأمان، والكفاءة، والأداء طويل الأجل</p>
         </div>
         <div class="row g-4">
             @foreach (var category in Model.FeaturedCategories)
@@ -64,10 +64,10 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div>
-                <h2 class="fw-bold">Featured Products</h2>
-                <p class="text-muted mb-0">Selected solutions trusted by industrial and commercial clients.</p>
+                <h2 class="fw-bold">منتجات مميزة</h2>
+                <p class="text-muted mb-0">حلول مختارة تحظى بثقة العملاء في القطاعين الصناعي والتجاري</p>
             </div>
-            <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">View All</a>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">عرض الكل</a>
         </div>
         <div class="row g-4">
             @foreach (var product in Model.FeaturedProducts)
@@ -84,7 +84,7 @@
                             <p class="text-muted mb-2">@product.Brand</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <strong class="text-primary">@product.Price.ToString("C")</strong>
-                                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">تفاصيل</a>
                             </div>
                         </div>
                     </div>
@@ -97,8 +97,8 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">Featured Projects</h2>
-            <p class="text-muted">Our completed work reflects reliability, quality, and client-first execution.</p>
+            <h2 class="fw-bold">مشاريع مميزة</h2>
+            <p class="text-muted">يعكس عملنا المكتمل الموثوقية والجودة والتنفيذ بأسلوب يضع العملاء في المقدمة.</p>
         </div>
         <div class="row g-4">
             @foreach (var project in Model.FeaturedProjects)
@@ -113,7 +113,7 @@
                             <h3 class="h5">@project.Title</h3>
                             <p class="text-muted mb-2">@project.ClientName</p>
                             <p class="mb-3">@project.Location</p>
-                            <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id" class="btn btn-outline-primary">View Project</a>
+                            <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id" class="btn btn-outline-primary">عرض المشروع</a>
                         </div>
                     </div>
                 </div>
@@ -125,8 +125,8 @@
 <section class="py-5 bg-white">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">What We Do</h2>
-            <p class="text-muted">AISS delivers integrated solutions across critical infrastructure and industrial operations.</p>
+            <h2 class="fw-bold">ما نقوم به</h2>
+            <p class="text-muted">تقدم S H G حلولًا متكاملة عبر البنية التحتية الحاسمة والعمليات الصناعية.</p>
         </div>
         <div class="row g-4">
             @foreach (var service in Model.Services)
@@ -147,7 +147,7 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">Why Choose AISS</h2>
+            <h2 class="fw-bold">لماذا تختار S H G</h2>
         </div>
         <div class="row g-4">
             @foreach (var reason in Model.WhyChooseUs)
@@ -167,11 +167,11 @@
 
 <section class="py-5 bg-primary text-white">
     <div class="container text-center">
-        <h2 class="fw-bold mb-3">Looking for a trusted supply and project partner?</h2>
-        <p class="lead text-light-emphasis">Let us support your next industrial, energy, or infrastructure requirement.</p>
+        <h2 class="fw-bold mb-3">تبحث عن شريك موثوق لاحتياجاتك الصناعية أو البنية التحتية؟</h2>
+        <p class="lead text-light-emphasis">دعنا ندعمك في متطلباتك القادمة من الصناعة أو الطاقة أو البنية التحتية.</p>
         <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
-            <a asp-controller="Contact" asp-action="Index" class="btn btn-light btn-lg">Contact Us</a>
-            <a asp-controller="Quote" asp-action="Index" class="btn btn-outline-light btn-lg">Request Quote</a>
+            <a asp-controller="Contact" asp-action="Index" class="btn btn-light btn-lg">اتصل بنا</a>
+            <a asp-controller="Quote" asp-action="Index" class="btn btn-outline-light btn-lg">اطلب عرض أسعار</a>
         </div>
     </div>
 </section>

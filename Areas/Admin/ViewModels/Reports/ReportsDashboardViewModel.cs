@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Al_Shami_ِAISS_.Areas.Admin.ViewModels.Reports;
+namespace Al_Shami_AISS_.Areas.Admin.ViewModels.Reports;
 
 /// <summary>
 /// Represents the view model used by the reporting dashboard.

@@ -1,9 +1,9 @@
 @{
     // SEO metadata is kept in one reusable partial so every page can share the same rules.
     // This keeps titles, descriptions, keywords, and canonical links consistent across the application.
-    var seoTitle = ViewData["SeoTitle"] as string ?? ViewData["MetaTitle"] as string ?? ViewData["Title"] as string ?? "AISS";
-    var seoDescription = ViewData["MetaDescription"] as string ?? "AISS delivers industrial, engineering, and supply solutions for business and infrastructure projects.";
-    var seoKeywords = ViewData["MetaKeywords"] as string ?? "AISS, industrial supply, engineering solutions";
+    var seoTitle = ViewData["SeoTitle"] as string ?? ViewData["MetaTitle"] as string ?? ViewData["Title"] as string ?? "S H G";
+    var seoDescription = ViewData["MetaDescription"] as string ?? "S H G توفر حلولاً صناعية وهندسية وإمدادية للمشاريع التجارية ومشاريع البنية التحتية.";
+    var seoKeywords = ViewData["MetaKeywords"] as string ?? "S H G,امدادات صناعية , حلول هنـدسـية";
     var canonicalUrl = ViewData["CanonicalUrl"] as string ?? $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
     var ogTitle = ViewData["OgTitle"] as string ?? seoTitle;
     var ogDescription = ViewData["OgDescription"] as string ?? seoDescription;

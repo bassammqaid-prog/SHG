@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.ViewModels.ProductListViewModel
+@model Al_Shami_AISS_.ViewModels.ProductListViewModel
 
 @{
     ViewData["Title"] = "Products";
@@ -10,8 +10,8 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
             <div>
-                <h1 class="fw-bold mb-1">Our Products</h1>
-                <p class="text-muted mb-0">Explore our industrial and infrastructure supply portfolio.</p>
+                <h1 class="fw-bold mb-1">منتجاتنا</h1>
+                <p class="text-muted mb-0">استكشف مجموعة منتجاتنا الصناعية والبنية التحتية.</p>
             </div>
         </div>
 
@@ -19,13 +19,13 @@
             <div class="card-body">
                 <form asp-action="Index" method="get" class="row g-3 align-items-end">
                     <div class="col-md-5">
-                        <label class="form-label">Search by product name</label>
-                        <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search products..." />
+                        <label class="form-label">البحث عن طريق اسم المنتج</label>
+                        <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="ابحث عن المنتجات..." />
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Filter by category</label>
+                        <label class="form-label">تصنيف حسب الفئات</label>
                         <select name="categoryId" class="form-select">
-                            <option value="">All categories</option>
+                            <option value="">جميع الفئات</option>
                             @foreach (var category in Model.Categories)
                             {
                                 <option value="@category.Id" selected="@(Model.CategoryId == category.Id ? "selected" : null)">@category.Name</option>
@@ -33,7 +33,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary w-100">Search</button>
+                        <button type="submit" class="btn btn-primary w-100">بحث</button>
                     </div>
                 </form>
             </div>
@@ -58,7 +58,7 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <strong class="text-primary">@product.Price.ToString("C")</strong>
                                     </div>
-                                    <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary w-100">View Details</a>
+                                    <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary w-100">رؤية التفاصيل</a>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
             <nav aria-label="Product pagination" class="mt-5">
                 <ul class="pagination justify-content-center">
                     <li class="page-item @(Model.PageNumber <= 1 ? "disabled" : "")">
-                        <a class="page-link" asp-action="Index" asp-route-searchTerm="@Model.SearchTerm" asp-route-categoryId="@Model.CategoryId" asp-route-pageNumber="@(Model.PageNumber - 1)">Previous</a>
+                        <a class="page-link" asp-action="Index" asp-route-searchTerm="@Model.SearchTerm" asp-route-categoryId="@Model.CategoryId" asp-route-pageNumber="@(Model.PageNumber - 1)">السابق</a>
                     </li>
 
                     @for (int i = 1; i <= Model.TotalPages; i++)
@@ -89,7 +89,7 @@
                     }
 
                     <li class="page-item @(Model.PageNumber >= Model.TotalPages ? "disabled" : "")">
-                        <a class="page-link" asp-action="Index" asp-route-searchTerm="@Model.SearchTerm" asp-route-categoryId="@Model.CategoryId" asp-route-pageNumber="@(Model.PageNumber + 1)">Next</a>
+                        <a class="page-link" asp-action="Index" asp-route-searchTerm="@Model.SearchTerm" asp-route-categoryId="@Model.CategoryId" asp-route-pageNumber="@(Model.PageNumber + 1)">التالي</a>
                     </li>
                 </ul>
             </nav>

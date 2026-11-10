@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Al_Shami_ِAISS_.Areas.Admin.ViewModels;
+namespace Al_Shami_AISS_.Areas.Admin.ViewModels;
 
 /// <summary>
 /// Represents the admin product image listing page.

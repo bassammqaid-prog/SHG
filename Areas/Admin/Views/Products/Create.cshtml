@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProductCreateViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProductCreateViewModel
 
 @{
     ViewData["Title"] = "Create Product";
@@ -7,10 +7,10 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Create Product</h1>
-            <p class="text-muted mb-0">Add a new item to the product catalog.</p>
+            <h1 class="h3 mb-1">انشاء منتج</h1>
+            <p class="text-muted mb-0">اضافة منتج جديد إلى الكتالوج.</p>
         </div>
-        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">العودة إلى القائمة</a>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -20,77 +20,77 @@
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label asp-for="Name" class="form-label"></label>
+                        <label asp-for="Name" class="form-label">الاسم</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="CategoryId" class="form-label"></label>
+                        <label asp-for="CategoryId" class="form-label">الفئة</label>
                         <select asp-for="CategoryId" asp-items="Model.CategoryOptions" class="form-select">
-                            <option value="">Select Category</option>
+                            <option value="">تحديد الفئة</option>
                         </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="Brand" class="form-label"></label>
+                        <label asp-for="Brand" class="form-label">العلامة التجارية</label>
                         <input asp-for="Brand" class="form-control" />
                         <span asp-validation-for="Brand" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="ModelNumber" class="form-label"></label>
+                        <label asp-for="ModelNumber" class="form-label">رقم الموديل</label>
                         <input asp-for="ModelNumber" class="form-control" />
                         <span asp-validation-for="ModelNumber" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="Price" class="form-label"></label>
+                        <label asp-for="Price" class="form-label">السعر</label>
                         <input asp-for="Price" class="form-control" />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="StockQuantity" class="form-label"></label>
+                        <label asp-for="StockQuantity" class="form-label">كمية المخزون</label>
                         <input asp-for="StockQuantity" class="form-control" />
                         <span asp-validation-for="StockQuantity" class="text-danger"></span>
                     </div>
 
                     <div class="col-12">
-                        <label asp-for="ImageUrl" class="form-label"></label>
+                        <label asp-for="ImageUrl" class="form-label">رابط الصورة</label>
                         <input asp-for="ImageUrl" class="form-control" />
                         <span asp-validation-for="ImageUrl" class="text-danger"></span>
                     </div>
 
                     <div class="col-12">
-                        <label asp-for="Description" class="form-label"></label>
+                        <label asp-for="Description" class="form-label">الوصف</label>
                         <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="MetaTitle" class="form-label"></label>
+                        <label asp-for="MetaTitle" class="form-label">عنوان المنتج</label>
                         <input asp-for="MetaTitle" class="form-control" />
                         <span asp-validation-for="MetaTitle" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="Slug" class="form-label"></label>
+                        <label asp-for="Slug" class="form-label">الرابط الثابت</label>
                         <input asp-for="Slug" class="form-control" />
                         <span asp-validation-for="Slug" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="CanonicalUrl" class="form-label"></label>
+                        <label asp-for="CanonicalUrl" class="form-label">الرابط canonical</label>
                         <input asp-for="CanonicalUrl" class="form-control" />
                         <span asp-validation-for="CanonicalUrl" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="MetaDescription" class="form-label"></label>
+                        <label asp-for="MetaDescription" class="form-label">وصف المنتج</label>
                         <textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="MetaDescription" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="MetaKeywords" class="form-label"></label>
+                        <label asp-for="MetaKeywords" class="form-label"> الكلمات المفتاحية</label>
                         <input asp-for="MetaKeywords" class="form-control" />
                         <span asp-validation-for="MetaKeywords" class="text-danger"></span>
                     </div>
@@ -98,14 +98,14 @@
                     <div class="col-12">
                         <div class="form-check form-switch">
                             <input asp-for="IsFeatured" class="form-check-input" />
-                            <label asp-for="IsFeatured" class="form-check-label"></label>
+                            <label asp-for="IsFeatured" class="form-check-label">مميز   </label>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+                    <button type="submit" class="btn btn-primary">حفظ   </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary ms-2">الغاء</a>
                 </div>
             </form>
         </div>

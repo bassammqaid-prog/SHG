@@ -1,8 +1,8 @@
-namespace Al_Shami_ِAISS_.Areas.Admin.ViewModels;
+namespace Al_Shami_AISS_.Areas.Admin.ViewModels;
 
 /// <summary>
 /// Represents a single line item in the activity log list.
-/// This view model keeps the UI model separate from the <see cref="Al_Shami_ِAISS_.Models.ActivityLog"/> entity.
+/// This view model keeps the UI model separate from the <see cref="Al_Shami_AISS_.Models.ActivityLog"/> entity.
 /// </summary>
 public class ActivityLogListItemViewModel
 {

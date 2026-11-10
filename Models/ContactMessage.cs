@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.Models;
+namespace Al_Shami_AISS_.Models;
 
 /// <summary>
 /// Represents a general contact form message sent by a site visitor.

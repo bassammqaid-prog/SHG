@@ -1,9 +1,9 @@
 using System.Text;
-using Al_Shami_ِAISS_.Data;
-using Al_Shami_ِAISS_.Models;
+using Al_Shami_AISS_.Data;
+using Al_Shami_AISS_.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Al_Shami_ِAISS_.Services;
+namespace Al_Shami_AISS_.Services;
 
 /// <summary>
 /// Centralizes the generation and validation rules for SEO-friendly slugs.

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Al_Shami_ِAISS_.ViewModels;
+namespace Al_Shami_AISS_.ViewModels;
 
 /// <summary>
 /// Represents a category option used for product filtering.

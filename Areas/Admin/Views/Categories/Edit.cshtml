@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.CategoryEditViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.CategoryEditViewModel
 
 @{
     ViewData["Title"] = "Edit Category";
@@ -7,10 +7,10 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Edit Category</h1>
+            <h1 class="h3 mb-1">تعديل الفئة</h1>
             <p class="text-muted mb-0">Update category information.</p>
         </div>
-        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">العودة إلى القائمة</a>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -20,40 +20,40 @@
                 <input asp-for="Id" type="hidden" />
 
                 <div class="mb-3">
-                    <label asp-for="Name" class="form-label"></label>
+                    <label asp-for="Name" class="form-label">اسم الفئة</label>
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Description" class="form-label"></label>
+                    <label asp-for="Description" class="form-label">الوصف</label>
                     <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
-                        <label asp-for="MetaTitle" class="form-label"></label>
+                        <label asp-for="MetaTitle" class="form-label">عنوان المنتج</label>
                         <input asp-for="MetaTitle" class="form-control" />
                         <span asp-validation-for="MetaTitle" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="Slug" class="form-label"></label>
+                        <label asp-for="Slug" class="form-label">الرابط الثابت</label>
                         <input asp-for="Slug" class="form-control" />
                         <span asp-validation-for="Slug" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="CanonicalUrl" class="form-label"></label>
+                        <label asp-for="CanonicalUrl" class="form-label">الرابط canonical</label>
                         <input asp-for="CanonicalUrl" class="form-control" />
                         <span asp-validation-for="CanonicalUrl" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="MetaDescription" class="form-label"></label>
+                        <label asp-for="MetaDescription" class="form-label">وصف المنتج</label>
                         <textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="MetaDescription" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <label asp-for="MetaKeywords" class="form-label"></label>
+                        <label asp-for="MetaKeywords" class="form-label"> الكلمات المفتاحية</label>
                         <input asp-for="MetaKeywords" class="form-control" />
                         <span asp-validation-for="MetaKeywords" class="text-danger"></span>
                     </div>
@@ -61,11 +61,11 @@
 
                 <div class="form-check form-switch mb-3">
                     <input asp-for="IsActive" class="form-check-input" />
-                    <label asp-for="IsActive" class="form-check-label"></label>
+                    <label asp-for="IsActive" class="form-check-label">نشط</label>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update</button>
-                <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+                <button type="submit" class="btn btn-primary">تحديث </button>
+                <a asp-action="Index" class="btn btn-outline-secondary ms-2">الغاء  </a>
             </form>
         </div>
     </div>

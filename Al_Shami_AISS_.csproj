@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Al_Shami_ِAISS_</RootNamespace>
+    <RootNamespace>Al_Shami_AISS_</RootNamespace>
     <NuGetAudit>false</NuGetAudit>
   </PropertyGroup>
 

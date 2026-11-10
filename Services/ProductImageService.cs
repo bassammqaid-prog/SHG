@@ -1,9 +1,9 @@
-using Al_Shami_ِAISS_.Models;
-using Al_Shami_ِAISS_.Repositories.Interfaces;
+using Al_Shami_AISS_.Models;
+using Al_Shami_AISS_.Repositories.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
-namespace Al_Shami_ِAISS_.Services;
+namespace Al_Shami_AISS_.Services;
 
 /// <summary>
 /// Manages product gallery image logic.

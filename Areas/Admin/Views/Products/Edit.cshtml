@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProductEditViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProductEditViewModel
 
 @{
     ViewData["Title"] = "Edit Product";
@@ -7,10 +7,10 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Edit Product</h1>
-            <p class="text-muted mb-0">Update product information.</p>
+            <h1 class="h3 mb-1">تعديل المنتج</h1>
+            <p class="text-muted mb-0">تحديث معلومات المنتج.</p>
         </div>
-        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">العودة إلى القائمة</a>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -21,27 +21,27 @@
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label asp-for="Name" class="form-label"></label>
+                        <label asp-for="Name" class="form-label">الاسم</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="CategoryId" class="form-label"></label>
+                        <label asp-for="CategoryId" class="form-label">الفئة</label>
                         <select asp-for="CategoryId" asp-items="Model.CategoryOptions" class="form-select">
-                            <option value="">Select Category</option>
+                            <option value="">تحديد الفئة</option>
                         </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="Brand" class="form-label"></label>
+                        <label asp-for="Brand" class="form-label">العلامة التجارية</label>
                         <input asp-for="Brand" class="form-control" />
                         <span asp-validation-for="Brand" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="ModelNumber" class="form-label"></label>
+                        <label asp-for="ModelNumber" class="form-label">رقم الموديل</label>
                         <input asp-for="ModelNumber" class="form-control" />
                         <span asp-validation-for="ModelNumber" class="text-danger"></span>
                     </div>
@@ -106,7 +106,7 @@
 
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+                    <a asp-action="Index" class="btn btn-outline-secondary ms-2">الغاء</a>
                 </div>
             </form>
         </div>

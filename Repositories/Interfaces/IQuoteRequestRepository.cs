@@ -1,6 +1,6 @@
-using Al_Shami_ِAISS_.Models;
+using Al_Shami_AISS_.Models;
 
-namespace Al_Shami_ِAISS_.Repositories.Interfaces;
+namespace Al_Shami_AISS_.Repositories.Interfaces;
 
 /// <summary>
 /// Defines the repository contract for quote request persistence.

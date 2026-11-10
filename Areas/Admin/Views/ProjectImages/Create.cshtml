@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProjectImageCreateViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProjectImageCreateViewModel
 
 @{
     ViewData["Title"] = "Upload Project Image";
@@ -7,10 +7,10 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Upload Project Image</h1>
-            <p class="text-muted mb-0">Add a gallery image for @Model.ProjectTitle.</p>
+            <h1 class="h3 mb-1">تحميل صورة المشروع</h1>
+            <p class="text-muted mb-0">إضافة صورة إلى معرض المشروع @Model.ProjectTitle.</p>
         </div>
-        <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.ProjectId" class="btn btn-outline-secondary">Back to Gallery</a>
+        <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.ProjectId" class="btn btn-outline-secondary">العودة إلى المعرض</a>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -45,8 +45,8 @@
                 </div>
 
                 <div class="d-flex gap-2 mt-3">
-                    <button type="submit" class="btn btn-primary">Save Image</button>
-                    <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.ProjectId" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">حفظ الصورة</button>
+                    <a asp-area="Admin" asp-controller="ProjectImages" asp-action="Index" asp-route-projectId="@Model.ProjectId" class="btn btn-outline-secondary">إلغاء</a>
                 </div>
             </form>
         </div>

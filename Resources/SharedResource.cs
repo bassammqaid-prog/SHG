@@ -1,4 +1,4 @@
-namespace Al_Shami_ِAISS_.Resources;
+namespace Al_Shami_AISS_.Resources;
 
 /// <summary>
 /// Marker class used by ASP.NET Core localization.

@@ -1,4 +1,4 @@
-@model List<Al_Shami_ِAISS_.Areas.Admin.ViewModels.QuoteRequestListItemViewModel>
+@model List<Al_Shami_AISS_.Areas.Admin.ViewModels.QuoteRequestListItemViewModel>
 
 @{
     ViewData["Title"] = "Quote Requests";
@@ -7,11 +7,11 @@
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h1 class="h3 mb-1">Quote Requests</h1>
-            <p class="text-muted mb-0">Track customer quote requests and lead information.</p>
+            <h1 class="h3 mb-1">طلب عرض</h1>
+            <p class="text-muted mb-0">أفضل برامج تتبع عروض الأسعار والعملاء المحتملين.</p>
         </div>
         <a asp-action="Create" class="btn btn-primary">
-            <i class="bi bi-plus-circle me-2"></i>Create Quote Request
+            <i class="bi bi-plus-circle me-2"></i>انشاء طلب عرض
         </a>
     </div>
 
@@ -48,9 +48,9 @@
                                     <td>@item.CreatedAt.ToString("yyyy-MM-dd")</td>
                                     <td class="text-end">
                                         <div class="btn-group btn-group-sm" role="group">
-                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Details</a>
-                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>
-                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Delete</a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">تفاصيل</a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">تعديل</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">حذف</a>
                                         </div>
                                     </td>
                                 </tr>

@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProductImageCreateViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProductImageCreateViewModel
 
 @{
     ViewData["Title"] = "Upload Product Image";
@@ -7,10 +7,10 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Upload Product Image</h1>
-            <p class="text-muted mb-0">Add a product image or URL for @Model.ProductName.</p>
+            <h1 class="h3 mb-1">تحميل صورة المنتج</h1>
+            <p class="text-muted mb-0">أضف صورة أو رابط صورة للمنتج @Model.ProductName.</p>
         </div>
-        <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">Back to Gallery</a>
+        <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">العودة إلى المعرض</a>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Save Image</button>
-                    <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">حفظ الصورة</button>
+                    <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">إلغاء</a>
                 </div>
             </form>
         </div>

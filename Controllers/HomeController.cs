@@ -1,8 +1,12 @@
-using Al_Shami_ِAISS_.Services;
-using Al_Shami_ِAISS_.ViewModels;
+using Al_Shami_AISS_.Services;
+using Al_Shami_AISS_.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
-namespace Al_Shami_ِAISS_.Controllers;
+using Al_Shami_AISS_.Resources;
+using Microsoft.Extensions.Localization;
+
+namespace Al_Shami_AISS_.Controllers;
 
 /// <summary>
 /// Public-facing home controller for the company website.
@@ -13,15 +17,18 @@ public class HomeController : Controller
     private readonly CategoryService _categoryService;
     private readonly ProductService _productService;
     private readonly ProjectService _projectService;
+    private readonly IStringLocalizer<SharedResource> _localizer;
+
 
     /// <summary>
     /// Initializes the controller with the services required to render public pages.
     /// </summary>
-    public HomeController(CategoryService categoryService, ProductService productService, ProjectService projectService)
+    public HomeController(CategoryService categoryService, ProductService productService, ProjectService projectService, IStringLocalizer<SharedResource> localizer )
     {
         _categoryService = categoryService;
         _productService = productService;
         _projectService = projectService;
+        _localizer = localizer;
     }
 
     /// <summary>
@@ -106,9 +113,9 @@ public class HomeController : Controller
     public IActionResult About()
     {
         ViewData["Title"] = "من نحن";
-        ViewData["MetaTitle"] = "من نحن | AISS";
-        ViewData["MetaDescription"] = "تعرف على رؤية AISS ومهامها في تقديم حلول صناعية وتجارية موثوقة.";
-        ViewData["MetaKeywords"] = "من نحن, AISS, رؤية, حلول";
+        ViewData["MetaTitle"] = "من نحن | S H G";
+        ViewData["MetaDescription"] = "تعرف على رؤية S H G ومهامها في تقديم حلول صناعية وتجارية موثوقة.";
+        ViewData["MetaKeywords"] = "من نحن, S H G, رؤية, حلول";
         return View();
     }
 
@@ -118,9 +125,21 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         ViewData["Title"] = "سياسة الخصوصية";
-        ViewData["MetaTitle"] = "سياسة الخصوصية | AISS";
-        ViewData["MetaDescription"] = "اقرأ سياسة الخصوصية الخاصة بـ AISS وكيفية تعاملنا مع بيانات المستخدمين.";
-        ViewData["MetaKeywords"] = "سياسة الخصوصية, AISS";
+        ViewData["MetaTitle"] = "سياسة الخصوصية | S H G";
+        ViewData["MetaDescription"] = "اقرأ سياسة الخصوصية الخاصة بـ S H G وكيفية تعاملنا مع بيانات المستخدمين.";
+        ViewData["MetaKeywords"] = "سياسة الخصوصية, S H G";
         return View();
     }
+
+
+
+
+public IActionResult TestLocalization()
+{
+    var names = typeof(SharedResource)
+        .Assembly
+        .GetManifestResourceNames();
+
+    return Content(string.Join("\n", names));
+}
 }

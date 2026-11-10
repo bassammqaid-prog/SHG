@@ -1,6 +1,6 @@
-using Al_Shami_ِAISS_.Models;
+using Al_Shami_AISS_.Models;
 
-namespace Al_Shami_ِAISS_.Services;
+namespace Al_Shami_AISS_.Services;
 
 /// <summary>
 /// Defines the activity logging contract for the application.

@@ -1,9 +1,9 @@
-using Al_Shami_ِAISS_.Data;
-using Al_Shami_ِAISS_.Models;
-using Al_Shami_ِAISS_.Repositories.Interfaces;
+using Al_Shami_AISS_.Data;
+using Al_Shami_AISS_.Models;
+using Al_Shami_AISS_.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Al_Shami_ِAISS_.Repositories.Implementations;
+namespace Al_Shami_AISS_.Repositories.Implementations;
 
 /// <summary>
 /// Entity Framework implementation of the project image repository.

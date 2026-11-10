@@ -1,7 +1,7 @@
-using Al_Shami_ِAISS_.Models;
+using Al_Shami_AISS_.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Al_Shami_ِAISS_.Services;
+namespace Al_Shami_AISS_.Services;
 
 /// <summary>
 /// Initializes the default ASP.NET Core Identity roles and staff users.

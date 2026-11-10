@@ -2,7 +2,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Al_Shami_ِAISS_.Controllers;
+namespace Al_Shami_AISS_.Controllers;
 
 /// <summary>
 /// Handles the user-selected culture and persists it in a cookie for subsequent requests.

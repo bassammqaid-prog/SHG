@@ -1,9 +1,9 @@
 using System.Security.Claims;
-using Al_Shami_ِAISS_.Models;
-using Al_Shami_ِAISS_.Repositories.Interfaces;
+using Al_Shami_AISS_.Models;
+using Al_Shami_AISS_.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 
-namespace Al_Shami_ِAISS_.Services;
+namespace Al_Shami_AISS_.Services;
 
 /// <summary>
 /// Central service for auditing business actions and user activity.

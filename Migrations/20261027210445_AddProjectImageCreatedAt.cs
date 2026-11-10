@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Al_Shami_ِAISS_.Migrations
+namespace Al_Shami_AISS_.Migrations
 {
     /// <inheritdoc />
     public partial class AddProjectImageCreatedAt : Migration

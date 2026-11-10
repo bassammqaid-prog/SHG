@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.ProductImageDeleteViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.ProductImageDeleteViewModel
 
 @{
     ViewData["Title"] = "Delete Product Image";
@@ -7,8 +7,8 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-1">Delete Product Image</h1>
-            <p class="text-muted mb-0">This action removes the selected image from @Model.ProductName.</p>
+            <h1 class="h3 mb-1">حذف صورة المنتج</h1>
+            <p class="text-muted mb-0">سيؤدي هذا الإجراء إلى إزالة الصورة المحددة من @Model.ProductName.</p>
         </div>
         <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary">Back to Gallery</a>
     </div>
@@ -24,8 +24,8 @@
 
                     <form asp-area="Admin" asp-controller="ProductImages" asp-action="Delete" asp-route-id="@Model.Id" method="post">
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-danger">Delete Image</button>
-                        <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary ms-2">Cancel</a>
+                        <button type="submit" class="btn btn-danger">حذف</button>
+                        <a asp-area="Admin" asp-controller="ProductImages" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-outline-secondary ms-2">إلغاء</a>
                     </form>
                 </div>
             </div>

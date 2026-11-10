@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.ViewModels.LoginViewModel
+@model Al_Shami_AISS_.ViewModels.LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
@@ -12,8 +12,8 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body p-4 p-md-5">
                         <div class="text-center mb-4">
-                            <h1 class="h3 fw-bold">Admin Sign In</h1>
-                            <p class="text-muted mb-0">Access the AISS management portal.</p>
+                            <h1 class="h3 fw-bold">تسجيل دخول المسؤول</h1>
+                            <p class="text-muted mb-0">الوصول إلى بوابة إدارة S H G.</p>
                         </div>
 
                         <form asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
@@ -36,14 +36,14 @@
                                 <label asp-for="RememberMe" class="form-check-label"></label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
                         </form>
 
-                        <div class="mt-4 small text-muted">
+                     @*    <div class="mt-4 small text-muted">
                             Demo credentials:<br />
                             Admin: admin@aiss.local / Admin@123456<br />
                             Manager: manager@aiss.local / Manager@123456
-                        </div>
+                        </div> *@
                     </div>
                 </div>
             </div>

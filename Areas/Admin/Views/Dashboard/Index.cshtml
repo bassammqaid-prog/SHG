@@ -1,4 +1,4 @@
-@model Al_Shami_ِAISS_.Areas.Admin.ViewModels.DashboardViewModel
+@model Al_Shami_AISS_.Areas.Admin.ViewModels.DashboardViewModel
 
 @{
     ViewData["Title"] = "Admin Dashboard";
@@ -8,9 +8,9 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h3 mb-1">Admin Dashboard</h1>
-            <p class="text-muted mb-0">Overview of the core business data for AISS.</p>
+            <p class="text-muted mb-0">الصغحة الرئيسية لعرض ادارة S H G.</p>
         </div>
-        <span class="badge bg-primary rounded-pill px-3 py-2">System Overview</span>
+        <span class="badge bg-primary rounded-pill px-3 py-2">ادارة النظام</span>
     </div>
 
     <div class="row g-4">
@@ -18,7 +18,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-uppercase text-muted small mb-1">Categories</p>
+                        <p class="text-uppercase text-muted small mb-1">الفئات</p>
                         <h2 class="mb-0">@Model.TotalCategories</h2>
                     </div>
                     <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3">
@@ -32,7 +32,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-uppercase text-muted small mb-1">Products</p>
+                        <p class="text-uppercase text-muted small mb-1">المنتجات</p>
                         <h2 class="mb-0">@Model.TotalProducts</h2>
                     </div>
                     <div class="bg-success bg-opacity-10 text-success rounded-circle p-3">
@@ -46,7 +46,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-uppercase text-muted small mb-1">Projects</p>
+                        <p class="text-uppercase text-muted small mb-1">المشاريع</p>
                         <h2 class="mb-0">@Model.TotalProjects</h2>
                     </div>
                     <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-3">
@@ -60,7 +60,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-uppercase text-muted small mb-1">Contact Messages</p>
+                        <p class="text-uppercase text-muted small mb-1">رسائل التواصل</p>
                         <h2 class="mb-0">@Model.TotalContactMessages</h2>
                     </div>
                     <div class="bg-info bg-opacity-10 text-info rounded-circle p-3">
@@ -74,7 +74,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-uppercase text-muted small mb-1">Quote Requests</p>
+                        <p class="text-uppercase text-muted small mb-1">طلبات العرض</p>
                         <h2 class="mb-0">@Model.TotalQuoteRequests</h2>
                     </div>
                     <div class="bg-secondary bg-opacity-10 text-secondary rounded-circle p-3">
@@ -88,7 +88,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-uppercase text-muted small mb-1">Users</p>
+                        <p class="text-uppercase text-muted small mb-1">المستخدمين</p>
                         <h2 class="mb-0">@Model.TotalUsers</h2>
                     </div>
                     <div class="bg-dark bg-opacity-10 text-dark rounded-circle p-3">
@@ -102,7 +102,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-uppercase text-muted small mb-1">Activity Logs</p>
+                        <p class="text-uppercase text-muted small mb-1">سجلات النشاط</p>
                         <h2 class="mb-0">@Model.TotalActivityLogs</h2>
                     </div>
                     <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-3">
@@ -116,7 +116,7 @@
     <div class="row g-4 mt-2">
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white border-0 fw-semibold">Recent Quote Requests</div>
+                <div class="card-header bg-white border-0 fw-semibold">طلبات العرض الأخيرة</div>
                 <div class="list-group list-group-flush">
                     @foreach (var item in Model.RecentQuoteRequests)
                     {
@@ -136,7 +136,7 @@
 
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white border-0 fw-semibold">Recent Messages</div>
+                <div class="card-header bg-white border-0 fw-semibold">الرسائل الأخيرة</div>
                 <div class="list-group list-group-flush">
                     @foreach (var item in Model.RecentContactMessages)
                     {
@@ -156,7 +156,7 @@
 
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white border-0 fw-semibold">Recent Activity</div>
+                <div class="card-header bg-white border-0 fw-semibold">النشاط الأخير</div>
                 <div class="list-group list-group-flush">
                     @foreach (var item in Model.RecentActivityLogs)
                     {
