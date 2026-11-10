@@ -1,7 +1,13 @@
+// -----------------------------------------------------------------------------
+//  File: ProductsController.cs
+//  Purpose: Admin CRUD controller for product management.
+// -----------------------------------------------------------------------------
+
 using Al_Shami_AISS_.Areas.Admin.ViewModels;
 using Al_Shami_AISS_.Models;
 using Al_Shami_AISS_.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -17,14 +23,22 @@ public class ProductsController : Controller
 {
     private readonly ProductService _productService;
     private readonly CategoryService _categoryService;
+    private readonly ProductImageService _productImageService;
+    private readonly IWebHostEnvironment _hostingEnvironment;
 
     /// <summary>
     /// Initializes the controller with product and category services.
     /// </summary>
-    public ProductsController(ProductService productService, CategoryService categoryService)
+    /// <param name="productService">Service that manages product persistence and business rules.</param>
+    /// <param name="categoryService">Service that supplies category lists for product forms.</param>
+    /// <param name="productImageService">Service used to save and manage product image records.</param>
+    /// <param name="hostingEnvironment">Hosting environment used for local file storage paths.</param>
+    public ProductsController(ProductService productService, CategoryService categoryService, ProductImageService productImageService, IWebHostEnvironment hostingEnvironment)
     {
         _productService = productService;
         _categoryService = categoryService;
+        _productImageService = productImageService;
+        _hostingEnvironment = hostingEnvironment;
     }
 
     /// <summary>
@@ -103,6 +117,11 @@ public class ProductsController : Controller
     {
         model.CategoryOptions = await GetCategorySelectListAsync();
 
+        if (model.UploadedImage is not null && model.UploadedImage.Length == 0)
+        {
+            ModelState.AddModelError(nameof(model.UploadedImage), "Please select a valid image file.");
+        }
+
         if (!ModelState.IsValid)
         {
             return View(model);
@@ -129,7 +148,23 @@ public class ProductsController : Controller
             CreatedAt = DateTime.UtcNow
         };
 
-        await _productService.AddAsync(product);
+        try
+        {
+            await _productService.AddAsync(product);
+
+            if (model.UploadedImage is not null)
+            {
+                var productImage = await _productImageService.AddAsync(product.Id, model.UploadedImage, null, _hostingEnvironment);
+                product.ImageUrl = productImage.ImageUrl;
+                await _productService.UpdateAsync(product);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(nameof(model.UploadedImage), ex.Message);
+            return View(model);
+        }
+
         TempData["SuccessMessage"] = "Product created successfully.";
         return RedirectToAction(nameof(Index));
     }

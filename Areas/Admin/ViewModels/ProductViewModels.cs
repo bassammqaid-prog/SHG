@@ -1,4 +1,10 @@
+// -----------------------------------------------------------------------------
+//  File: ProductViewModels.cs
+//  Purpose: View models used by admin product management screens.
+// -----------------------------------------------------------------------------
+
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Al_Shami_AISS_.Areas.Admin.ViewModels;
@@ -102,6 +108,13 @@ public class ProductCreateViewModel
     [Url(ErrorMessage = "Please enter a valid image URL.")]
     [Display(Name = "Image URL")]
     public string? ImageUrl { get; set; }
+
+    /// <summary>
+    /// Optional uploaded image file used to create the initial product gallery image.
+    /// When provided, this uploaded image becomes the product cover image URL.
+    /// </summary>
+    [Display(Name = "Upload Image")]
+    public IFormFile? UploadedImage { get; set; }
 
     [StringLength(100, ErrorMessage = "Model number cannot exceed 100 characters.")]
     [Display(Name = "Model Number")]

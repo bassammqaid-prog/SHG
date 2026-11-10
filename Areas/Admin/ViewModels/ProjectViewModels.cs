@@ -1,4 +1,10 @@
+// -----------------------------------------------------------------------------
+//  File: ProjectViewModels.cs
+//  Purpose: View models used by the admin project management screens.
+// -----------------------------------------------------------------------------
+
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace Al_Shami_AISS_.Areas.Admin.ViewModels;
 
@@ -41,6 +47,8 @@ public class ProjectDetailsViewModel
 
     [Display(Name = "Image URL")]
     public string? ImageUrl { get; set; }
+   // public IFormFile? UploadedImage { get; set; }
+
 
     [Display(Name = "Client")]
     public string? ClientName { get; set; }
@@ -73,6 +81,13 @@ public class ProjectCreateViewModel
     [Url(ErrorMessage = "Please enter a valid image URL.")]
     [Display(Name = "Image URL")]
     public string? ImageUrl { get; set; }
+
+    /// <summary>
+    /// Optional uploaded image file used to create the first project gallery image.
+    /// When supplied, this file is saved by the project image service and assigned as the cover image.
+    /// </summary>
+    [Display(Name = "Upload Image")]
+    public IFormFile? UploadedImage { get; set; }
 
     [StringLength(200, ErrorMessage = "Client name cannot exceed 200 characters.")]
     [Display(Name = "Client")]

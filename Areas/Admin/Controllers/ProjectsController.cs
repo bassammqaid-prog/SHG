@@ -1,7 +1,13 @@
+// -----------------------------------------------------------------------------
+//  File: ProjectsController.cs
+//  Purpose: Admin CRUD controller for project management.
+// -----------------------------------------------------------------------------
+
 using Al_Shami_AISS_.Areas.Admin.ViewModels;
 using Al_Shami_AISS_.Models;
 using Al_Shami_AISS_.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Al_Shami_AISS_.Areas.Admin.Controllers;
@@ -15,13 +21,20 @@ namespace Al_Shami_AISS_.Areas.Admin.Controllers;
 public class ProjectsController : Controller
 {
     private readonly ProjectService _projectService;
+    private readonly ProjectImageService _projectImageService;
+    private readonly IWebHostEnvironment _hostingEnvironment;
 
     /// <summary>
     /// Initializes the controller with the project service.
     /// </summary>
-    public ProjectsController(ProjectService projectService)
+    /// <param name="projectService">Service used for project CRUD operations.</param>
+    /// <param name="projectImageService">Service used to save and manage project images.</param>
+    /// <param name="hostingEnvironment">Hosting environment used to resolve web root paths for uploads.</param>
+    public ProjectsController(ProjectService projectService, ProjectImageService projectImageService, IWebHostEnvironment hostingEnvironment)
     {
         _projectService = projectService;
+        _projectImageService = projectImageService;
+        _hostingEnvironment = hostingEnvironment;
     }
 
     /// <summary>
@@ -84,6 +97,11 @@ public class ProjectsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(ProjectCreateViewModel model)
     {
+        if (model.UploadedImage is not null && model.UploadedImage.Length == 0)
+        {
+            ModelState.AddModelError(nameof(model.UploadedImage), "Please select a valid image file.");
+        }
+
         if (!ModelState.IsValid)
         {
             return View(model);
@@ -107,7 +125,23 @@ public class ProjectsController : Controller
                 : model.CanonicalUrl
         };
 
-        await _projectService.AddAsync(project);
+        try
+        {
+            await _projectService.AddAsync(project);
+
+            if (model.UploadedImage is not null)
+            {
+                var projectImage = await _projectImageService.AddAsync(project.Id, model.UploadedImage, null, _hostingEnvironment);
+                project.ImageUrl = projectImage.ImageUrl;
+                await _projectService.UpdateAsync(project);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(nameof(model.UploadedImage), ex.Message);
+            return View(model);
+        }
+
         TempData["SuccessMessage"] = "Project created successfully.";
         return RedirectToAction(nameof(Index));
     }
