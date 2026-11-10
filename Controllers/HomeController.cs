@@ -37,9 +37,9 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         ViewData["Title"] = "الرئيسية";
-        ViewData["MetaTitle"] = "AISS | حلول صناعية وتوريد";
-        ViewData["MetaDescription"] = "AISS تقدم حلولاً صناعية وتقنية وتوريدية متكاملة للمشاريع التجارية والصناعية.";
-        ViewData["MetaKeywords"] = "AISS, حلول صناعية, توريد, مشاريع, كهرباء";
+        ViewData["MetaTitle"] = "S H G | حلول صناعية وتوريد";
+        ViewData["MetaDescription"] = "S H G تقدم حلولاً صناعية وتقنية وتوريدية متكاملة للمشاريع التجارية والصناعية.";
+        ViewData["MetaKeywords"] = "S H G, حلول صناعية, توريد, مشاريع, كهرباء";
 
         var categories = (await _categoryService.GetAllAsync())
             .Where(c => c.IsActive)
@@ -89,18 +89,19 @@ public class HomeController : Controller
                 .ToList(),
             Services = new List<string>
             {
-                "Engineering Solutions",
-                "Industrial Equipment Supply",
-                "Safety Systems",
-                "Energy Infrastructure",
-                "Maintenance and Support"
+                "حلول هندسية",
+                "توريد المعدات الصناعية",
+                "أنظمة السلامة",
+                "البنية التحتية للطاقة",
+                "الصيانة والدعم",
+                "توفير قطع الغيار"
             },
             WhyChooseUs = new List<string>
             {
-                "Proven project execution",
-                "Certified industrial supply partners",
-                "Responsive customer support",
-                "Quality-first sourcing and delivery"
+                "تنفيذ المشاريع المثبتة",
+                "شركاء توريد صناعي معتمدين",
+                "دعم العملاء السريع",
+                "توريد وتسليم عالي الجودة"
             }
         };
 

@@ -11,16 +11,17 @@
 @* This page is the public landing page for AISS and is designed to build trust with customers. *@
 @* The model is mapped in the controller so the Razor view stays focused on presentation and not data access. *@
 
-<section class="bg-dark text-white py-5">
+@* <section class="bg-dark text-white py-5"> *@
+    <section class="hero-section text-white py-5">
     <div class="container py-5">
         <div class="row align-items-center g-4">
             <div class="col-lg-7">
                 <span class="badge bg-warning text-dark mb-3">حلول صناعية موثوقة</span>
                 <h1 class="display-4 fw-bold">تعزيز التقدم بحلول صناعية موثوقة</h1>
-                <p class="lead text-light-emphasis">@Model.CompanyIntroduction</p>
+                <p class="lead text-bg-danger">@Model.CompanyIntroduction</p>
                 <div class="d-flex gap-3 flex-wrap mt-4">
                     <a asp-controller="Products" asp-action="Index" class="btn btn-warning btn-lg">اكتشف المنتجات</a>
-                    <a asp-controller="Quote" asp-action="Index" class="btn btn-outline-light btn-lg">طلب عرض سعر</a>
+                    <a asp-controller="Quote" asp-action="Index" class="btn btn-warning btn-lg">طلب عرض سعر</a>
                 </div>
             </div>
             <div class="col-lg-5">

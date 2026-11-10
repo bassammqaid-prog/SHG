@@ -29,3 +29,13 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    background-image: url('/images/company-building2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
