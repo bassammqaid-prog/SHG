@@ -1,4 +1,7 @@
-FROM ://microsoft.com AS build
+ARG REG=mcr.microsoft
+ARG TLD=com
+
+FROM ${REG}.${TLD}/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY ["Al_Shami_AISS_.csproj", "./"]
@@ -7,7 +10,7 @@ RUN dotnet restore "Al_Shami_AISS_.csproj"
 COPY . .
 RUN dotnet publish "Al_Shami_AISS_.csproj" -c Release -o /app/publish
 
-FROM ://microsoft.com AS final
+FROM ${REG}.${TLD}/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
